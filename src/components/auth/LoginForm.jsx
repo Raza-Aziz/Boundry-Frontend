@@ -39,24 +39,28 @@ function LoginForm() {
     <div className="w-full">
       <form onSubmit={handleSubmit(submitHandler)} className="w-full space-y-6">
         {/* EMAIL FIELD */}
-        <label className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-          Email Address
-        </label>
-        <div className="relative">
-          <MailIcon
-            size={18}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-          />
-          <input
-            {...register("email")}
-            type="email"
-            placeholder="name@example.com"
-            className={`w-full pl-10 pr-4 py-3 rounded-lg text-sm font-[Poppins] bg-[#ffffff] border-2 border-black focus:ring-0 transition-colors ${errors.email ? "border-red-500" : "border-gray-300"}`}
-          />
+        <div>
+          <label className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+            Email Address
+          </label>
+          <div className="relative">
+            <MailIcon
+              size={18}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+            />
+            <input
+              {...register("email")}
+              type="email"
+              placeholder="name@example.com"
+              className={`w-full pl-10 pr-4 py-3 rounded-lg text-sm font-[Poppins] bg-[#ffffff] border-2 border-black focus:ring-0 transition-colors ${errors.email ? "border-red-500" : "border-gray-300"}`}
+            />
+          </div>
+          {errors.email && (
+            <p className="text-xs text-red-500 font-[Poppins]">
+              {errors.email.message}
+            </p>
+          )}
         </div>
-        {errors.email && (
-          <p className="text-xs text-red-500">{errors.email.message}</p>
-        )}
 
         {/* PASSWORD FIELD */}
         <div>
@@ -94,10 +98,13 @@ function LoginForm() {
             </button>
           </div>
           {errors.password && (
-            <p className="text-xs text-red-500">{errors.password.message}</p>
+            <p className="text-xs text-red-500 font-[Poppins] ">
+              {errors.password.message}
+            </p>
           )}
         </div>
 
+        {/* TODO : Add functionality to Sign In */}
         <button
           type="submit"
           disabled={isLoading}
