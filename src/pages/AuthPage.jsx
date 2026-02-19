@@ -1,8 +1,8 @@
-import React from "react";
 import AuthLayout from "@/components/layout/AuthLayout";
 import LoginForm from "@/components/auth/LoginForm";
 import RegisterForm from "@/components/auth/RegisterForm";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Link } from "react-router-dom";
 
 const AuthPage = () => {
   return (
@@ -69,13 +69,12 @@ const AuthPage = () => {
 
       {/* 4. Home Navigation (Optional Footer) */}
       <div className="mt-8">
-        {/* TODO : Navigate to homepage via Link */}
-        <button
-          onClick={() => window.history.back()}
+        <Link
+          to="/"
           className="text-xs cursor-pointer text-stone-400 hover:text-stone-600 transition-colors font-[Poppins] flex items-center justify-center gap-1"
         >
           ← Return to Home Page
-        </button>
+        </Link>
       </div>
     </AuthLayout>
   );
