@@ -5,8 +5,7 @@ import { useLoginMutation } from "../../store/api/authApi";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
-import { MailIcon, KeyRound } from "lucide-react";
+import { EyeIcon, EyeOffIcon, MailIcon, KeyRound } from "lucide-react";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -25,6 +24,7 @@ function LoginForm() {
       await login(values).unwrap();
       toast.success("Successfully logged in. Welcome back to Boundry", {
         position: "top-right",
+        duration: 2000,
       });
       navigate("/");
     } catch (error) {
@@ -104,7 +104,6 @@ function LoginForm() {
           )}
         </div>
 
-        {/* TODO : Add functionality to Sign In */}
         <button
           type="submit"
           disabled={isLoading}

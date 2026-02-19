@@ -4,15 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useRegisterMutation } from "../../store/api/authApi";
-import React from "react";
-import {
-  MailIcon,
-  User2,
-  Phone,
-  KeyRound,
-  EyeIcon,
-  EyeOffIcon,
-} from "lucide-react";
+import { MailIcon, User2, KeyRound, EyeIcon, EyeOffIcon } from "lucide-react";
 import { useState } from "react";
 
 function RegisterForm() {
@@ -40,6 +32,7 @@ function RegisterForm() {
       await signup(formattedValues).unwrap();
       toast.success("Account created successfully", {
         position: "top-right",
+        duration: 2000,
       });
       navigate("/");
     } catch (error) {
@@ -106,18 +99,6 @@ function RegisterForm() {
             Phone Number
           </label>
           <div className="relative">
-            {/* <Phone
-              size={18}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-            />*/}
-            {/* <input
-              {...register("phone")}
-              type="tel"
-              inputMode="numeric"
-              maxLength={10}
-              placeholder="+92XXXXXXXXXX"
-              className={`w-full pl-10 pr-4 py-3 rounded-lg text-sm font-[Poppins] bg-[#ffffff] border-2 border-black focus:ring-0 transition-colors ${errors.phone ? "border-red-500" : "border-gray-300"}`}
-            />*/}
             <div className="flex">
               {/* STATIC PREFIX */}
               <div className="flex items-center px-3 rounded-l-lg border-2 border-r-0 border-gray-300 bg-gray-100 text-sm font-[Poppins] text-gray-600">
@@ -220,7 +201,6 @@ function RegisterForm() {
         </div>
 
         {/* SUBMIT BUTTON */}
-        {/* TODO : Add functionality to Create Account */}
         <button
           type="submit"
           disabled={isLoading}
