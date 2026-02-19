@@ -1,6 +1,6 @@
 import { baseApi } from "./baseApi";
 
-const authApi = baseApi.injectEndpoints({
+export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (userData) => ({
@@ -22,7 +22,7 @@ const authApi = baseApi.injectEndpoints({
 
     logout: builder.mutation({
       query: () => ({
-        url: "/logout",
+        url: "/auth/logout",
         method: "POST",
       }),
       invalidatesTags: ["User", "Listings"],
@@ -30,7 +30,7 @@ const authApi = baseApi.injectEndpoints({
 
     getCurrentUser: builder.query({
       query: () => ({
-        url: "/profile",
+        url: "/auth/profile",
       }),
       providesTags: ["User"],
     }),
