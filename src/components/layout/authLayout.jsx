@@ -1,5 +1,3 @@
-import React from "react";
-
 const AuthLayout = ({ children }) => {
   return (
     <div className="grid min-h-svh lg:grid-cols-[0.415fr_0.585fr]">
