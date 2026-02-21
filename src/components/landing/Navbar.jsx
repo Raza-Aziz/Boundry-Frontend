@@ -17,7 +17,7 @@ import { toast } from "sonner";
 
 const navLinks = [
   { label: "About Us", href: "/about-us" },
-  { label: "Buy", href: "/listings" },
+  { label: "Buy", href: "/search" },
   { label: "Option 3", href: "/contact-us" },
 ];
 
@@ -47,9 +47,11 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="shrink-0 flex items-center  cursor-pointer">
-            <span className="font-serif text-2xl font-bold tracking-tight text-boundry-primary">
-              Boundry
-            </span>
+            <Link to={"/"}>
+              <span className="font-serif text-2xl font-bold tracking-tight text-boundry-primary">
+                Boundry
+              </span>
+            </Link>
             <span className="h-1 w-1 rounded-full bg-gray-800 mt-4" />
           </div>
 
