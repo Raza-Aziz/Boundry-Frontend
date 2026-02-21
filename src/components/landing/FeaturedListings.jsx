@@ -1,4 +1,5 @@
-import { PropertyCard } from "./PropertyCard";
+import PropertyCard from "./PropertyCard";
+import SearchPropertyCard from "../search/SearchPropertyCard";
 import { ArrowRight } from "lucide-react";
 
 // TODO : Maybe try to fetch listings from backend via API
@@ -14,6 +15,13 @@ const properties = [
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuAOxuqt6MSOMIhVWNLcQFdoGROYw-CNuL7jl1u3rO7YzzxPx6TugeC7f1ALrZmra_tpMyoX1pBknIvvtxfV2oV6hti1rfv_jwHpqjadUcf3tZzZutnAeqivCHpU-W01-WkyKrtpYOGDb05eOr_aJHFmAHzabZHR5a09RCxfJW2apPoFZENvhHOcwJVKvzrwqfGx92509K1aXOf-kOnsIKDrHz1Rlw7aI13SdAadRmxHgHarMDXkWWKQ4wDskDfcziOl_43PLdDnBw",
     badges: ["NEW", "VERIFIED"],
+    agent: {
+      name: "Alexander Sterling",
+      agency: "Boundry Excl.",
+      initials: "AS",
+      avatar:
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuAdTntM70yGExbmDFrThMiujYqiU8s2IGgf7-hNl-ZN-VNa-4HdmPFQ5KydzZKdCOhc2ZNJZP6Eb605aiW6-jwO4ktTB2IZlPW9M2KyLx4tMOyTQ92F2e5uGfXSBFQ849-aQMOB8v0FlMmtPoOoweoLKVIYsuuKY5z9-fYJ-Rx3ileORhBOxaAceS73uOixVEqqZsO03zXFq2nuLyzXkmQ5yLQbUvMnne-IgcCDGW9krAVpEBcd5Or261U7fywkx5z_aavqtAW_tA",
+    },
   },
   {
     id: 2,
@@ -26,6 +34,13 @@ const properties = [
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuCw7Gsfx4Xt8f3PflTL3vKavs4rgtJkbl3LhT0qba36TGTYwFDMNOQeFRxdckOhiiOQqHKdFXbvK-7Ju3qH43kfDKkSb-HYY82QX_g9KiZ3JHAiKFRl0sAns6SMRhdNhWzahpYq1HhCWnlbXq21pp_LWEweULL8cwQjScYTaR4yN4H5oRXqTndT9CggETbvHo34jDR1dGenuVZv81S23Ql4PrD6HcNWUELLcYfipZyp9BPev5clCD0n_t3BBX8sZuSs85msBE7byg",
     badges: ["FEATURED"],
+    agent: {
+      name: "Alexander Sterling",
+      agency: "Boundry Excl.",
+      initials: "AS",
+      avatar:
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuAdTntM70yGExbmDFrThMiujYqiU8s2IGgf7-hNl-ZN-VNa-4HdmPFQ5KydzZKdCOhc2ZNJZP6Eb605aiW6-jwO4ktTB2IZlPW9M2KyLx4tMOyTQ92F2e5uGfXSBFQ849-aQMOB8v0FlMmtPoOoweoLKVIYsuuKY5z9-fYJ-Rx3ileORhBOxaAceS73uOixVEqqZsO03zXFq2nuLyzXkmQ5yLQbUvMnne-IgcCDGW9krAVpEBcd5Or261U7fywkx5z_aavqtAW_tA",
+    },
   },
   {
     id: 3,
@@ -38,6 +53,13 @@ const properties = [
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuAbePwyCQ4GzdOzV2x-qzldsjPHwxGW-8wyuz2U1JxH0GoC8dZss9MoxFEVQrvMcX23WtGaGFcZPCHZdkX3249zKKo8--jat3W2Mb7RnHmwrW6MA__i83_070AvqLd1MOfzHt-FyGJE5z4JrCx7Zf91gJF_liPSJDdvNDwHPjT3PBpnzn_EWNxT_4XjbPcMCI2McvrbKmzmFmeq7IOVBk3IvOTZIayKGoBqrdA71mIrAWTZDfG9HcxSRQ7SA3_lJfZ76mkP2DfEFw",
     badges: [],
+    agent: {
+      name: "Alexander Sterling",
+      agency: "Boundry Excl.",
+      initials: "AS",
+      avatar:
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuAdTntM70yGExbmDFrThMiujYqiU8s2IGgf7-hNl-ZN-VNa-4HdmPFQ5KydzZKdCOhc2ZNJZP6Eb605aiW6-jwO4ktTB2IZlPW9M2KyLx4tMOyTQ92F2e5uGfXSBFQ849-aQMOB8v0FlMmtPoOoweoLKVIYsuuKY5z9-fYJ-Rx3ileORhBOxaAceS73uOixVEqqZsO03zXFq2nuLyzXkmQ5yLQbUvMnne-IgcCDGW9krAVpEBcd5Or261U7fywkx5z_aavqtAW_tA",
+    },
   },
 ];
 
@@ -66,6 +88,7 @@ export default function FeaturedListings() {
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {properties.map((p) => (
+            // <SearchPropertyCard key={p.id} property={p} />
             <PropertyCard key={p.id} property={p} />
           ))}
         </div>
