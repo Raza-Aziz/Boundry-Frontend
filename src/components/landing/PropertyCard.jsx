@@ -1,6 +1,6 @@
 import { Heart, MapPin, Bed, Bath, Ruler, BadgeCheck } from "lucide-react";
 
-export const PropertyCard = ({ property }) => {
+const PropertyCard = ({ property }) => {
   return (
     <div className="group bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
       {/* Image */}
@@ -12,9 +12,9 @@ export const PropertyCard = ({ property }) => {
         />
 
         {/* Badges */}
-        {property.badges.length > 0 && (
+        {property.badges?.length > 0 && (
           <div className="absolute top-4 left-4 flex gap-2">
-            {property.badges.map((badge) =>
+            {property.badges?.map((badge) =>
               badge === "VERIFIED" ? (
                 <span
                   key={badge}
@@ -65,3 +65,5 @@ export const PropertyCard = ({ property }) => {
     </div>
   );
 };
+
+export default PropertyCard;
