@@ -57,7 +57,7 @@ export default function SearchPropertyCard({ property }) {
             {priceFormatter.format(property.price)}
           </h3>
         </div>
-        <p className="text-gray-500 text-sm mb-4 flex items-center gap-1">
+        <p className="text-gray-500 text-sm mb-4 flex capitalize items-center gap-1">
           <MapPin className="w-3.5 h-3.5" />{" "}
           {property.location.area + ", " + property.location.city}
         </p>
@@ -67,20 +67,22 @@ export default function SearchPropertyCard({ property }) {
         <div className="flex items-center gap-4 text-stone-600 dark:text-stone-300 mb-6 font-body text-xs">
           <div className="flex items-center gap-1">
             <Bed className="text-boundry-primary text-base" />
-            <span className="font-medium">{property.bedrooms}</span>
-            <span className="text-stone-400">Beds</span>
+            <span className="font-medium mt-1">{property.bedrooms}</span>
+            <span className="text-stone-400 mt-1">Beds</span>
           </div>
           <div className="w-px h-3 bg-stone-300 dark:bg-stone-700"></div>
           <div className="flex items-center gap-1">
             <Bath className="text-boundry-primary text-base" />
-            <span className="font-medium">{property.bathrooms}</span>
-            <span className="text-stone-400">Baths</span>
+            <span className="font-medium mt-1">{property.bathrooms}</span>
+            <span className="text-stone-400 mt-1">Baths</span>
           </div>
           <div className="w-px h-3 bg-stone-300 dark:bg-stone-700"></div>
           <div className="flex items-center gap-1">
             <Ruler className="text-boundry-primary text-base" />
-            <span className="font-medium">{formatSqft(property.areaSqft)}</span>
-            <span className="text-stone-400">Sqft</span>
+            <span className="font-medium mt-1">
+              {formatSqft(property.areaSqft)}
+            </span>
+            <span className="text-stone-400 mt-1">Sqft</span>
           </div>
         </div>
         <div className="mt-auto pt-4 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between">
