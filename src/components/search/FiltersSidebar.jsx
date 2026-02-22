@@ -1,4 +1,4 @@
-import { Search, ChevronDown } from "lucide-react";
+import { Search, CircleX } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -9,30 +9,34 @@ export default function FiltersSidebar() {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentFilters = Object.fromEntries([...searchParams]);
 
-  const [cityInput, setCityInput] = useState(currentFilters.city);
+  const [cityInput, setCityInput] = useState(currentFilters.city ?? "");
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (cityInput) {
-        setSearchParams({
-          ...currentFilters,
-          city: cityInput.toLocaleLowerCase(),
-        });
+      const params = new URLSearchParams(searchParams);
+
+      if (cityInput && cityInput.trim()) {
+        params.set("city", cityInput.trim().toLowerCase());
       } else {
-        // params.set()
-        searchParams.delete("city");
-        setCityInput(null);
+        params.delete("city");
       }
+      setSearchParams(params, { replace: true });
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [cityInput, currentFilters, searchParams, setSearchParams]);
+  }, [cityInput, searchParams, setSearchParams]);
 
   const handleTabChange = (newStatus) => {
     if (newStatus == "sale")
-      setSearchParams({ ...currentFilters, status: "for-sale" });
+      setSearchParams(
+        { ...currentFilters, status: "for-sale" },
+        { replace: true },
+      );
     else if (newStatus == "rent")
-      setSearchParams({ ...currentFilters, status: "for-rent" });
+      setSearchParams(
+        { ...currentFilters, status: "for-rent" },
+        { replace: true },
+      );
   };
 
   // Read current values (fall back to defaults)
@@ -42,44 +46,56 @@ export default function FiltersSidebar() {
   const handleAreaChange = (value) => {
     const [min, max] = value;
 
-    setSearchParams({
-      ...currentFilters,
-      minAreaSqft: String(min),
-      maxAreaSqft: String(max),
-    });
+    setSearchParams(
+      {
+        ...currentFilters,
+        minAreaSqft: String(min),
+        maxAreaSqft: String(max),
+      },
+      { replace: true },
+    );
   };
 
   const handleResetFilters = () => {
-    setSearchParams({});
-    setCityInput(null);
+    setSearchParams({}, { replace: true });
+    setCityInput("");
   };
 
   const handleBedroomCount = (count) => {
     if (count == "Any") {
       searchParams.delete("bedrooms");
-      setSearchParams(searchParams);
+      setSearchParams(searchParams, { replace: true });
     } else {
-      setSearchParams({ ...currentFilters, bedrooms: Number(count) });
+      setSearchParams(
+        { ...currentFilters, bedrooms: Number(count) },
+        { replace: true },
+      );
     }
   };
 
   const handleBathroomCount = (count) => {
     if (count == "Any") {
       searchParams.delete("bathrooms");
-      setSearchParams(searchParams);
+      setSearchParams(searchParams, { replace: true });
     } else {
-      setSearchParams({ ...currentFilters, bathrooms: Number(count) });
+      setSearchParams(
+        { ...currentFilters, bathrooms: Number(count) },
+        { replace: true },
+      );
     }
   };
 
   const handlePropertyTypeChange = (type) => {
-    setSearchParams({ ...currentFilters, propertyType: type.toLowerCase() });
+    setSearchParams(
+      { ...currentFilters, propertyType: type.toLowerCase() },
+      { replace: true },
+    );
   };
 
   const handleClearSearch = () => {
-    setCityInput(null);
+    setCityInput("");
     searchParams.delete("city");
-    setSearchParams(searchParams);
+    setSearchParams(searchParams, { replace: true });
   };
 
   return (
@@ -128,20 +144,24 @@ export default function FiltersSidebar() {
             Location
           </label>
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-lg" />
+            <Search
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400"
+              size={20}
+            />
             <input
               className="w-full pl-10 pr-4 py-3 bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-lg text-sm focus:ring-1 focus:ring-boundry-primary focus:border-boundry-primary placeholder-stone-400 font-body"
-              placeholder="City, Neighborhood, or ZIP"
+              placeholder="Search by City"
               type="text"
+              value={cityInput}
               onChange={(e) => setCityInput(e.target.value)}
             />
+            <button
+              onClick={handleClearSearch}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 transition-colors"
+            >
+              <CircleX className="w-4 h-4" />{" "}
+            </button>
           </div>
-          <button
-            className="cursor-pointer text-boundry-primary-dark"
-            onClick={handleClearSearch}
-          >
-            Clear Search
-          </button>
         </div>
 
         {/* Square Feet */}
@@ -222,14 +242,6 @@ export default function FiltersSidebar() {
             onValueChange={handlePropertyTypeChange}
             className="space-y-2"
           >
-            {/* Include "Any" so users can deselect */}
-            {/* <div className="flex items-center gap-3">
-              <RadioGroupItem value="Any" id="any-type" />
-              <Label htmlFor="any-type" className="cursor-pointer">
-                Any Type
-              </Label>
-            </div>*/}
-
             {["House", "Apartment", "Villa", "Studio", "Office"].map((type) => (
               <div key={type} className="flex items-center gap-3">
                 {/* value is lowercase to match model/URL, display is capitalized for UI */}
@@ -268,42 +280,6 @@ export default function FiltersSidebar() {
             )}
           </div>
         </div> */}
-
-        {/* Listing Age */}
-        <div className="space-y-3">
-          <label className="text-xs font-semibold uppercase tracking-wider text-stone-500">
-            Listing Age
-          </label>
-          <div className="relative group">
-            <select className="w-full bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-lg text-sm text-stone-700 dark:text-stone-300 py-2.5 pl-3 pr-10 focus:ring-boundry-primary focus:border-boundry-primary font-body appearance-none cursor-pointer">
-              <option>Any time</option>
-              <option>Newest Listings</option>
-              <option>Last 3 days</option>
-              <option>Last 7 days</option>
-              <option>Last 30 days</option>
-              <option>Older</option>
-            </select>
-            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 pointer-events-none text-lg" />
-          </div>
-        </div>
-
-        {/* Status */}
-        {/* <div className="space-y-3 pb-8 border-b border-stone-200 dark:border-stone-700">
-          <label className="text-xs font-semibold uppercase tracking-wider text-stone-500">
-            Status
-          </label>
-          <div className="flex flex-wrap gap-2">
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 cursor-pointer border border-green-200 dark:border-green-800">
-              Active
-            </span>
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-stone-100 text-stone-600 dark:bg-stone-800 dark:text-stone-400 cursor-pointer hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors">
-              Coming Soon
-            </span>
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-stone-100 text-stone-600 dark:bg-stone-800 dark:text-stone-400 cursor-pointer hover:bg-stone-200 dark:hover:bg-stone-700 transition-colors">
-              Pending
-            </span>
-          </div>
-          </div> */}
       </div>
     </aside>
   );
