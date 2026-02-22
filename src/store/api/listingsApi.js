@@ -10,7 +10,6 @@ export const listingsApi = baseApi.injectEndpoints({
         params,
       }),
       invalidatesTags: ["Listings"],
-      keepUnusedDataFor: 120,
     }),
   }),
 });
