@@ -8,6 +8,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AuthPage from "./pages/AuthPage.jsx";
 import LandingPage from "./pages/LandingPage.jsx";
 import SearchPage from "./pages/SearchPage.jsx";
+import PropertyDetailPage from "./pages/PropertyDetailPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       // getlistings
 
       // getspecificlisting
+      {
+        path: "/listing/:id",
+        element: <PropertyDetailPage />,
+      },
       // getuserprofile
       // getusers
       // getOwnListings
