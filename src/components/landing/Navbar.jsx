@@ -79,10 +79,7 @@ export default function Navbar() {
                     className="rounded-full cursor-pointer"
                   >
                     <Avatar>
-                      <AvatarImage
-                        // src="https://github.com/raza-aziz.png"
-                        alt="user"
-                      />
+                      <AvatarImage src={user?.avatar?.url} alt="user" />
                       <AvatarFallback className="uppercase text-white bg-gray-800">
                         {user ? user.username[0] : "U"}
                       </AvatarFallback>
@@ -119,7 +116,7 @@ export default function Navbar() {
                 // className="hidden md:block text-sm font-medium text-gray-900 hover:text-boundry-primary"
                 className="bg-boundry-primary hover:bg-gray-800 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-lg shadow-boundry-primary/20 cursor-pointer"
               >
-                Sign In
+                Get Started
               </Link>
             )}
             {isAuthenticated ? (
@@ -131,7 +128,7 @@ export default function Navbar() {
                 to={"/auth"}
                 className="hidden md:block text-sm font-medium text-gray-900 hover:text-boundry-primary transition-colors"
               >
-                Sign Up
+                Sign In
               </Link>
             )}
           </div>
