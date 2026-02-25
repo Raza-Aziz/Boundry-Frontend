@@ -22,7 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useGetListingsQuery } from "../store/api/listingsApi";
 
 export default function SearchPage() {
@@ -56,10 +56,10 @@ export default function SearchPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background-light dark:bg-background-dark text-stone-800 dark:text-stone-200 font-display antialiased selection:bg-primary/30 selection:text-primary-dark">
+    <div className="min-h-screen bg-boundry-bg-light dark:bg-background-dark text-stone-800 dark:text-stone-200 font-display antialiased selection:bg-primary/30 selection:text-primary-dark">
       <Navbar />
       {/* Main Content Area */}
-      <div className="max-w-[1600px] mt-12 mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-[1600px]  mt-12 mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-12 gap-8">
           {/* Sidebar */}
           <FiltersSidebar />
@@ -132,7 +132,9 @@ export default function SearchPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
               {/* TODO : If isLoading is true, show your Skeleton loaders. */}
               {data?.listings?.map((prop) => (
-                <SearchPropertyCard key={prop.id} property={prop} />
+                <Link to={`/listing/${prop._id}`}>
+                  <SearchPropertyCard key={prop.id} property={prop} />
+                </Link>
               ))}
             </div>
 
