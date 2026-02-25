@@ -1,9 +1,30 @@
 import { Search } from "lucide-react";
-import { Select, SelectSection, SelectItem } from "@heroui/select";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const quickTags = ["Waterfront", "Penthouses", "Modern", "Historic"];
 
 export default function HeroSection() {
+  const navigate = useNavigate();
+
+  const [filters, setFilters] = useState({
+    location: "",
+    type: "house",
+    status: "for-sale",
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const params = new URLSearchParams();
+
+    if (filters.location) params.append("city", filters.location);
+    if (filters.type !== "house") params.append("propertyType", filters.type);
+    if (filters.status !== "for-sale") params.append("status", filters.status);
+
+    navigate(`/search?${params.toString()}`);
+  };
+
   return (
     <div className="relative h-screen w-full overflow-hidden flex items-center justify-center">
       {/* Background Image */}
@@ -30,15 +51,22 @@ export default function HeroSection() {
         {/* Glassmorphic Search Bar */}
         {/* TODO : Add functionality to the search bar */}
         <div className="w-full glass-search p-2 md:p-3 rounded-2xl md:rounded-full shadow-2xl">
-          <form className="flex flex-col md:flex-row items-center gap-2">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col md:flex-row items-center gap-2"
+          >
             {/* Location */}
             <div className="relative grow w-full md:w-auto px-4 py-2 border-b md:border-b-0 md:border-r border-white/10">
               <label className="block text-xs uppercase tracking-wider text-white/60 mb-1 ml-1">
-                Location
+                City
               </label>
               <input
                 type="text"
-                placeholder="Los Angeles, CA"
+                value={filters.location}
+                onChange={(e) =>
+                  setFilters({ ...filters, location: e.target.value })
+                }
+                placeholder="Karachi"
                 className="w-full bg-transparent border-none text-white placeholder-white/50 focus:ring-0 focus:outline-none p-0 text-lg font-medium"
               />
             </div>
@@ -48,30 +76,41 @@ export default function HeroSection() {
               <label className="block text-xs uppercase tracking-wider text-white/60 mb-1 ml-1">
                 Type
               </label>
-              <select className="w-full bg-transparent border-none text-white focus:ring-0 focus:outline-none p-0 text-lg font-medium cursor-pointer [&>option]:text-black">
-                <option>All Types</option>
-                <option>House</option>
-                <option>Condo</option>
-                <option>Estate</option>
+              <select
+                value={filters.type}
+                onChange={(e) =>
+                  setFilters({ ...filters, type: e.target.value })
+                }
+                className="w-full bg-transparent border-none text-white focus:ring-0 focus:outline-none p-0 capitalize text-lg font-medium cursor-pointer [&>option]:text-black"
+              >
+                <option>house</option>
+                <option>apartment</option>
+                <option>villa</option>
+                <option>studio</option>
+                <option>office</option>
               </select>
             </div>
 
             {/* Price */}
             <div className="relative w-full md:w-48 px-4 py-2">
               <label className="block text-xs uppercase tracking-wider text-white/60 mb-1 ml-1">
-                Price
+                For
               </label>
-              <select className="w-full bg-transparent border-none text-white focus:ring-0 focus:outline-none p-0 text-lg font-medium cursor-pointer [&>option]:text-black">
-                <option>Any Price</option>
-                <option>$1M - $5M</option>
-                <option>$5M - $10M</option>
-                <option>$10M+</option>
+              <select
+                value={filters.status}
+                onChange={(e) =>
+                  setFilters({ ...filters, status: e.target.value })
+                }
+                className="w-full capitalize bg-transparent border-none text-white focus:ring-0 focus:outline-none p-0 text-lg font-medium cursor-pointer [&>option]:text-black"
+              >
+                <option>for-sale</option>
+                <option>for-rent</option>
               </select>
             </div>
 
             {/* Search Button */}
             <button
-              type="button"
+              type="submit"
               className="w-full md:w-auto bg-boundry-primary hover:bg-boundry-primary-dark text-white rounded-xl md:rounded-full p-4 transition-colors flex items-center justify-center shadow-lg cursor-pointer"
             >
               <Search className="w-5 h-5" />
