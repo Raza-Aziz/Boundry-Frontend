@@ -23,7 +23,7 @@ export default function SearchPropertyCard({ property }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60"></div>
 
         {/* Badges */}
-        {property.badges && property.badges.length > 0 && (
+        {/* {property.badges && property.badges.length > 0 && (
           <div className="absolute top-4 left-4 flex gap-2">
             {property.badges.map((badge, index) => (
               <span
@@ -38,11 +38,11 @@ export default function SearchPropertyCard({ property }) {
               </span>
             ))}
           </div>
-        )}
+        )}*/}
 
         {/* Status Badge */}
         {property.status && (
-          <div className="absolute bottom-4 left-4 text-white">
+          <div className="absolute top-4 left-4 text-white">
             <p className="text-xs font-medium bg-black/30 backdrop-blur-sm px-2 py-1 rounded inline-block mb-1">
               {property.status === "for-rent" ? "For Rent" : "For Sale"}
             </p>
