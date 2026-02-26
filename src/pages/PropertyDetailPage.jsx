@@ -22,6 +22,7 @@ export default function PropertyDetail() {
     skip: !id,
   });
 
+  // TODO : Add a spinner for loading while the data is fetched
   const { data: similarListingsData, isLoading: isSimilarLoading } =
     useGetSimilarListingsQuery(
       {
