@@ -9,7 +9,23 @@ export default function FiltersSidebar() {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentFilters = Object.fromEntries([...searchParams]);
 
+  const [searchInput, setSearchInput] = useState(currentFilters.search ?? "");
   const [cityInput, setCityInput] = useState(currentFilters.city ?? "");
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const params = new URLSearchParams(searchParams);
+
+      if (searchInput && searchInput.trim()) {
+        params.set("search", searchInput.trim().toLowerCase());
+      } else {
+        params.delete("search");
+      }
+      setSearchParams(params, { replace: true });
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [searchInput, searchParams, setSearchParams]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -58,6 +74,7 @@ export default function FiltersSidebar() {
 
   const handleResetFilters = () => {
     setSearchParams({}, { replace: true });
+    setSearchInput("");
     setCityInput("");
   };
 
@@ -93,6 +110,12 @@ export default function FiltersSidebar() {
   };
 
   const handleClearSearch = () => {
+    setSearchInput("");
+    searchParams.delete("search");
+    setSearchParams(searchParams, { replace: true });
+  };
+
+  const handleClearCitySearch = () => {
     setCityInput("");
     searchParams.delete("city");
     setSearchParams(searchParams, { replace: true });
@@ -141,6 +164,31 @@ export default function FiltersSidebar() {
         {/* Location */}
         <div className="space-y-3">
           <label className="text-xs font-semibold uppercase tracking-wider text-stone-500">
+            Search
+          </label>
+          <div className="relative">
+            <Search
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400"
+              size={20}
+            />
+            <input
+              className="w-full pl-10 pr-4 py-3 bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-lg text-sm focus:ring-1 focus:ring-boundry-primary focus:border-boundry-primary placeholder-stone-400 font-body"
+              placeholder="Search for Property"
+              type="text"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
+            <button
+              onClick={handleClearSearch}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 transition-colors"
+            >
+              <CircleX className="w-4 h-4" />{" "}
+            </button>
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          <label className="text-xs font-semibold uppercase tracking-wider text-stone-500">
             Location
           </label>
           <div className="relative">
@@ -150,13 +198,13 @@ export default function FiltersSidebar() {
             />
             <input
               className="w-full pl-10 pr-4 py-3 bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-lg text-sm focus:ring-1 focus:ring-boundry-primary focus:border-boundry-primary placeholder-stone-400 font-body"
-              placeholder="Search by City"
+              placeholder="Search for city"
               type="text"
               value={cityInput}
               onChange={(e) => setCityInput(e.target.value)}
             />
             <button
-              onClick={handleClearSearch}
+              onClick={handleClearCitySearch}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 transition-colors"
             >
               <CircleX className="w-4 h-4" />{" "}
