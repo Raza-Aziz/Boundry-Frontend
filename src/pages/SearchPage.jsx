@@ -31,11 +31,13 @@ export default function SearchPage() {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
+  const search = searchParams.get("search") || "";
   const currentFilters = {
     ...Object.fromEntries([...searchParams]),
     page,
     sortBy,
     sortOrder,
+    search,
   };
 
   const { data, isLoading, isError, error } =
