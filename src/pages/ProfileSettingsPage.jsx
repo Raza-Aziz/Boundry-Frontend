@@ -5,8 +5,8 @@ import SidebarMenu from "../components/profile/SidebarMenu";
 import ProfileForm from "../components/profile/ProfileForm";
 
 const sidebarLinks = [
-  { label: "Profile", icon: User, active: true },
-  { label: "My Listings", icon: Building2 },
+  { label: "Profile", icon: User, active: true, path: "/u/profile" },
+  { label: "My Listings", icon: Building2, path: "/u/listings" },
 ];
 
 export default function ProfileSettingsPage() {
@@ -20,7 +20,7 @@ export default function ProfileSettingsPage() {
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="font-serif text-3xl md:text-4xl text-stone-900 dark:text-white font-medium">
-            Settings
+            Dashboard
           </h1>
           <p className="text-stone-500 mt-2 font-[Poppins] text-sm">
             Manage your account settings and set e-mail preferences.
