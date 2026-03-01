@@ -34,6 +34,15 @@ export const listingsApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Listings"],
     }),
+
+    updateAcquiredStatus: builder.mutation({
+      query: ({ id, status }) => ({
+        url: `/listings/${id}/acquired-status`,
+        method: "PATCH",
+        body: { acquiredStatus: status },
+      }),
+      invalidatesTags: ["Listings"],
+    }),
   }),
 });
 
@@ -42,4 +51,5 @@ export const {
   useGetListingQuery,
   useGetSimilarListingsQuery,
   useGetUserListingsQuery,
+  useUpdateAcquiredStatusMutation,
 } = listingsApi;
