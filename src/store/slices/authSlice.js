@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { authApi } from "../api/authApi";
+import { userApi } from "../api/userApi";
 
 const initialState = {
   user: null,
@@ -44,6 +45,13 @@ const authSlice = createSlice({
       (state, action) => {
         state.user = action.payload;
         state.isAuthenticated = true;
+      },
+    );
+
+    builder.addMatcher(
+      userApi.endpoints.updateProfile.matchFulfilled,
+      (state, action) => {
+        state.user = action.payload;
       },
     );
   },
