@@ -87,7 +87,7 @@ export default function SearchPropertyCard({ property }) {
         </div>
         <div className="mt-auto pt-4 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            {property.createdBy.avatar?.url ? (
+            {property?.createdBy?.avatar?.url ? (
               <img
                 alt="Agent"
                 className="w-6 h-6 rounded-full object-cover"
@@ -97,11 +97,11 @@ export default function SearchPropertyCard({ property }) {
               <div
                 className={`w-6 h-6 rounded-full flex uppercase items-center justify-center text-[10px] font-bold bg-boundry-primary/20 text-boundry-primary`}
               >
-                {property.createdBy.username?.charAt(0).toUpperCase()}
+                {property?.createdBy?.username?.charAt(0).toUpperCase()}
               </div>
             )}
             <span className="text-xs text-stone-500 capitalize font-medium">
-              {property.createdBy.username}
+              {property?.createdBy?.username}
             </span>
           </div>
           {/* <span className="text-[10px] text-stone-400 font-medium uppercase tracking-wider">
