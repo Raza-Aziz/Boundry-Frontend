@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function SidebarMenu({ sidebarLinks }) {
   return (
@@ -7,9 +8,9 @@ function SidebarMenu({ sidebarLinks }) {
         {sidebarLinks.map((link) => {
           const Icon = link.icon;
           return (
-            <a
+            <Link
               key={link.label}
-              href="#"
+              to={link.path}
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                 link.active
                   ? "bg-white dark:bg-[#2a2422] shadow-sm border border-stone-200 dark:border-stone-700 text-boundry-primary font-medium"
@@ -18,7 +19,7 @@ function SidebarMenu({ sidebarLinks }) {
             >
               <Icon className="w-5 h-5" />
               <span className="font-[Poppins] text-sm">{link.label}</span>
-            </a>
+            </Link>
           );
         })}
       </nav>
