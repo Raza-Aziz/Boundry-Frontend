@@ -25,6 +25,15 @@ export const listingsApi = baseApi.injectEndpoints({
         url: `/listings?city=${city}&status=${status}&limit=3&sort=-createdAt`,
       }),
     }),
+
+    getUserListings: builder.query({
+      query: (params) => ({
+        url: `/listings/my-listings`,
+        method: "GET",
+        params,
+      }),
+      providesTags: ["Listings"],
+    }),
   }),
 });
 
@@ -32,4 +41,5 @@ export const {
   useGetListingsQuery,
   useGetListingQuery,
   useGetSimilarListingsQuery,
+  useGetUserListingsQuery,
 } = listingsApi;
