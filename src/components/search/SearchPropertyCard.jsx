@@ -52,10 +52,19 @@ export default function SearchPropertyCard({ property }) {
 
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
-        <div className="flex justify-between items-start mb-2">
-          <h3 className="font-serif text-2xl text-stone-900 dark:text-white font-medium">
-            {priceFormatter.format(property.price)}
-          </h3>
+        {/* TODO 1: MAKE THE CARD LENGTH CONSISTENT */}
+        {/* TODO 2: Set the title and price properly */}
+        <div className="flex flex-row justify-between gap-1">
+          <div className="flex justify-between items-start mb-2">
+            <h3 className="font-serif text-lg text-stone-900 dark:text-white font-medium text-wrap text-ellipsis">
+              {property.title}
+            </h3>
+          </div>
+          <div className="flex justify-between items-start mb-2">
+            <h3 className="font-serif text-lg text-stone-900 dark:text-white font-medium">
+              {priceFormatter.format(property.price)}
+            </h3>
+          </div>
         </div>
         <p className="text-gray-500 text-sm mb-4 flex capitalize items-center gap-1">
           <MapPin className="w-3.5 h-3.5" />{" "}
