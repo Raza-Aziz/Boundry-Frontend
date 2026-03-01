@@ -79,9 +79,9 @@ export default function Navbar() {
                   >
                     <Avatar>
                       <AvatarImage src={user?.avatar?.url} alt="user" />
-                      <AvatarFallback className="uppercase text-white bg-gray-800">
+                      {/* <AvatarFallback className="uppercase text-white bg-gray-800">
                         {user ? user.username[0] : "U"}
-                      </AvatarFallback>
+                      </AvatarFallback>*/}
                     </Avatar>
                   </Button>
                 </DropdownMenuTrigger>
@@ -90,11 +90,11 @@ export default function Navbar() {
                   <DropdownMenuGroup>
                     <DropdownMenuItem>
                       <User />
-                      <Link to={"/profile"}>My Profile</Link>
+                      <Link to={"/u/profile"}>My Profile</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
                       <Store />
-                      <Link to={"/"}>My Listings</Link>
+                      <Link to={"/u/listings"}>My Listings</Link>
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
