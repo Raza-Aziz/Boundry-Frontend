@@ -11,6 +11,8 @@ import SearchPage from "./pages/SearchPage.jsx";
 import PropertyDetailPage from "./pages/PropertyDetailPage.jsx";
 import ProfileSettingsPage from "./pages/ProfileSettingsPage.jsx";
 import UserListingsPage from "./pages/UserListingsPage.jsx";
+import DashboardLayout from "./components/layout/DashboardLayout.jsx";
+import ListingFormPage from "./pages/ListingFormPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -53,16 +55,31 @@ const router = createBrowserRouter([
         element: <PropertyDetailPage />,
       },
       // profile settings
-      {
-        path: "/u/profile",
-        element: <ProfileSettingsPage />,
-      },
+
       // getuserprofile
       // getusers
       // getOwnListings
       {
-        path: "/u/listings",
-        element: <UserListingsPage />,
+        path: "/u",
+        element: <DashboardLayout />,
+        children: [
+          {
+            path: "profile",
+            element: <ProfileSettingsPage />,
+          },
+          {
+            path: "listings",
+            element: <UserListingsPage />,
+          },
+          {
+            path: "listings/new",
+            element: <ListingFormPage />,
+          },
+          {
+            path: "listings/:id",
+            element: <ListingFormPage />,
+          },
+        ],
       },
     ],
   },
