@@ -43,6 +43,24 @@ export const listingsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Listings"],
     }),
+
+    createListing: builder.mutation({
+      query: (propertyDetails) => ({
+        url: `/listings`,
+        method: "POST",
+        body: propertyDetails,
+      }),
+      invalidatesTags: ["Listings"],
+    }),
+
+    updateListing: builder.mutation({
+      query: ({ id, newDetails }) => ({
+        url: `/listings/${id}`,
+        method: "PATCH",
+        body: newDetails,
+      }),
+      invalidatesTags: ["Listings"],
+    }),
   }),
 });
 
@@ -52,4 +70,6 @@ export const {
   useGetSimilarListingsQuery,
   useGetUserListingsQuery,
   useUpdateAcquiredStatusMutation,
+  useCreateListingMutation,
+  useUpdateListingMutation,
 } = listingsApi;
