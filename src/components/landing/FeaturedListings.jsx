@@ -1,8 +1,9 @@
 import PropertyCard from "./PropertyCard";
-import SearchPropertyCard from "../search/SearchPropertyCard";
 import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
 
-// TODO : Maybe try to fetch listings from backend via API
 const properties = [
   {
     id: 1,
@@ -63,7 +64,58 @@ const properties = [
   },
 ];
 
+// ─── Variants ─────────────────────────────────────────────────────────────────
+
+const headerVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+const gridContainerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40, scale: 0.97 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] },
+  },
+};
+
+const linkVariants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut", delay: 0.3 },
+  },
+};
+
+// ─── Hook: fires once when element enters viewport ────────────────────────────
+
+function useScrollReveal(threshold = 0.15) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: threshold });
+  return { ref, isInView };
+}
+
+// ─── Component ────────────────────────────────────────────────────────────────
+
 export default function FeaturedListings() {
+  const { ref: headerRef, isInView: headerInView } = useScrollReveal(0.3);
+  const { ref: gridRef, isInView: gridInView } = useScrollReveal(0.1);
+  const { ref: linkRef, isInView: linkInView } = useScrollReveal(0.5);
+
   return (
     <section className="relative py-24 overflow-hidden bg-boundry-bg-light">
       {/* Beams */}
@@ -72,7 +124,13 @@ export default function FeaturedListings() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
+        <motion.div
+          ref={headerRef}
+          className="text-center mb-16"
+          variants={headerVariants}
+          initial="hidden"
+          animate={headerInView ? "visible" : "hidden"}
+        >
           <span className="text-boundry-primary text-sm font-bold tracking-[0.2em] uppercase mb-3 block">
             Exclusive Listings
           </span>
@@ -83,24 +141,38 @@ export default function FeaturedListings() {
             Hand-picked estates for the discerning buyer, vetted for quality,
             location, and architectural significance.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Grid — staggered cards */}
+        <motion.div
+          ref={gridRef}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={gridContainerVariants}
+          initial="hidden"
+          animate={gridInView ? "visible" : "hidden"}
+        >
           {properties.map((p) => (
-            // <SearchPropertyCard key={p.id} property={p} />
-            <PropertyCard key={p.id} property={p} />
+            <motion.div key={p.id} variants={cardVariants}>
+              <PropertyCard property={p} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="mt-12 text-center">
+        {/* CTA Link */}
+        <motion.div
+          ref={linkRef}
+          className="mt-12 text-center"
+          variants={linkVariants}
+          initial="hidden"
+          animate={linkInView ? "visible" : "hidden"}
+        >
           <a
             href="#"
             className="inline-flex items-center gap-2 text-boundry-primary hover:text-boundry-primary-dark font-medium transition-colors border-b-2 border-boundry-primary/20 hover:border-boundry-primary pb-1"
           >
             View All Properties <ArrowRight className="w-4 h-4" />
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
