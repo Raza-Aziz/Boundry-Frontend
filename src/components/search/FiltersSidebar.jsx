@@ -12,20 +12,20 @@ export default function FiltersSidebar() {
   const [searchInput, setSearchInput] = useState(currentFilters.search ?? "");
   const [cityInput, setCityInput] = useState(currentFilters.city ?? "");
 
+  // Example: The Debounced Effects (Search/City)
   useEffect(() => {
     const timer = setTimeout(() => {
       const params = new URLSearchParams(searchParams);
-
-      if (searchInput && searchInput.trim()) {
+      if (searchInput?.trim()) {
         params.set("search", searchInput.trim().toLowerCase());
+        params.delete("page"); // Reset here too!
       } else {
         params.delete("search");
       }
       setSearchParams(params, { replace: true });
     }, 500);
-
     return () => clearTimeout(timer);
-  }, [searchInput, searchParams, setSearchParams]);
+  }, [searchInput]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -33,6 +33,7 @@ export default function FiltersSidebar() {
 
       if (cityInput && cityInput.trim()) {
         params.set("city", cityInput.trim().toLowerCase());
+        params.delete("page"); // Reset page
       } else {
         params.delete("city");
       }
@@ -43,16 +44,10 @@ export default function FiltersSidebar() {
   }, [cityInput, searchParams, setSearchParams]);
 
   const handleTabChange = (newStatus) => {
-    if (newStatus == "sale")
-      setSearchParams(
-        { ...currentFilters, status: "for-sale" },
-        { replace: true },
-      );
-    else if (newStatus == "rent")
-      setSearchParams(
-        { ...currentFilters, status: "for-rent" },
-        { replace: true },
-      );
+    const params = new URLSearchParams(searchParams);
+    params.set("status", newStatus === "sale" ? "for-sale" : "for-rent");
+    params.delete("page"); // ALWAYS reset page to 1 on filter change
+    setSearchParams(params, { replace: true });
   };
 
   // Read current values (fall back to defaults)
@@ -60,16 +55,15 @@ export default function FiltersSidebar() {
   const maxArea = Number(currentFilters.maxAreaSqft ?? 5000);
 
   const handleAreaChange = (value) => {
+    const params = new URLSearchParams(searchParams);
+
     const [min, max] = value;
 
-    setSearchParams(
-      {
-        ...currentFilters,
-        minAreaSqft: String(min),
-        maxAreaSqft: String(max),
-      },
-      { replace: true },
-    );
+    params.set("minAreaSqft", String(min));
+    params.set("maxAreaSqft", String(max));
+    params.delete("page");
+
+    setSearchParams(params, { replace: true });
   };
 
   const handleResetFilters = () => {
@@ -79,34 +73,35 @@ export default function FiltersSidebar() {
   };
 
   const handleBedroomCount = (count) => {
+    const params = new URLSearchParams(searchParams);
     if (count == "Any") {
-      searchParams.delete("bedrooms");
-      setSearchParams(searchParams, { replace: true });
+      params.delete("bedrooms");
+      // params.set(searchParams, { replace: true });
     } else {
-      setSearchParams(
-        { ...currentFilters, bedrooms: Number(count) },
-        { replace: true },
-      );
+      params.set("bedrooms", count);
     }
+    params.delete("page");
+    setSearchParams(params, { replace: true });
   };
 
   const handleBathroomCount = (count) => {
+    const params = new URLSearchParams(searchParams);
     if (count == "Any") {
-      searchParams.delete("bathrooms");
-      setSearchParams(searchParams, { replace: true });
+      params.delete("bathrooms");
+      // params.set(searchParams, { replace: true });
     } else {
-      setSearchParams(
-        { ...currentFilters, bathrooms: Number(count) },
-        { replace: true },
-      );
+      params.set("bathrooms", count);
     }
+    params.delete("page");
+    setSearchParams(params, { replace: true });
   };
 
   const handlePropertyTypeChange = (type) => {
-    setSearchParams(
-      { ...currentFilters, propertyType: type.toLowerCase() },
-      { replace: true },
-    );
+    const params = new URLSearchParams(searchParams);
+
+    params.set("propertyType", type.toLowerCase());
+    params.delete("page");
+    setSearchParams(params, { replace: true });
   };
 
   const handleClearSearch = () => {
