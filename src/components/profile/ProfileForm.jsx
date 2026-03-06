@@ -5,13 +5,14 @@ import { useForm } from "react-hook-form";
 import { useUpdateProfileMutation } from "../../store/api/userApi";
 import { toast } from "sonner";
 import { useSelector } from "react-redux";
+import { useGetCurrentUserQuery } from "../../store/api/authApi";
 
 function ProfileForm() {
   const [showPassword, setShowPassword] = useState(false);
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const [updateProfile, isLoading] = useUpdateProfileMutation();
   const { register, handleSubmit, setValue, reset } = useForm();
-  const [preview, setPreview] = useState(user?.avatar?.url);
+  const { data: currentUser } = useGetCurrentUserQuery();
 
   const submitHandler = async (values) => {
     try {
@@ -40,7 +41,7 @@ function ProfileForm() {
             <img
               alt="Profile Photo"
               className="w-full h-full object-cover"
-              src={preview}
+              src={user?.avatar.url}
             />
           </div>
         </div>
