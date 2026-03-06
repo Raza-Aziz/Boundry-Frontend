@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import aboutHeroBg from "@/assets/about-hero-bg.png";
+import aboutHeroBg from "../assets/about-hero-bg.png";
 
 /* ──────────────────────────── Animation Variants ──────────────────────────── */
 const fadeUp = {
