@@ -144,6 +144,7 @@ const ListingFormPage = () => {
       submissionData.append("images", file);
     });
 
+    // TODO : Understand this
     try {
       if (isEditMode) {
         await updateListing({ id, newDetails: submissionData }).unwrap();
@@ -236,7 +237,7 @@ const ListingFormPage = () => {
                   <SelectTrigger className="w-full  py-5.5 rounded-lg bg-[#fafaf9]">
                     <SelectValue placeholder="Select a type" />
                   </SelectTrigger>
-                  <SelectContent className="bg-[#fafaf9]">
+                  <SelectContent className="border-0 bg-[#fafaf9]">
                     <SelectGroup>
                       <SelectLabel>Property Types</SelectLabel>
                       <SelectItem value="house">House</SelectItem>
@@ -260,7 +261,7 @@ const ListingFormPage = () => {
                   <SelectTrigger className="w-full rounded-lg bg-[#fafaf9]">
                     <SelectValue placeholder="Sale or Rent" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="border-0">
                     <SelectItem value="for-sale">For Sale</SelectItem>
                     <SelectItem value="for-rent">For Rent</SelectItem>
                   </SelectContent>
@@ -338,7 +339,7 @@ const ListingFormPage = () => {
                   </button>
                   <input
                     {...register("bedrooms")}
-                    className="w-full text-center border-y bg-[#fafaf9] py-1.75 pt-2 pb-1.5"
+                    className="w-full text-center border-y border-stone-200 bg-[#fafaf9] py-1.75 pt-2 pb-1.5"
                     readOnly
                   />
                   <button
