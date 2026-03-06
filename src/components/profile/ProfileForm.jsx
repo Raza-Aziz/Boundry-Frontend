@@ -41,7 +41,7 @@ function ProfileForm() {
             <img
               alt="Profile Photo"
               className="w-full h-full object-cover"
-              src={user?.avatar.url}
+              src={currentUser?.avatar.url}
             />
           </div>
         </div>
