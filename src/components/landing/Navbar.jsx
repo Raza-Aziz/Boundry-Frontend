@@ -16,8 +16,8 @@ import { toast } from "sonner";
 
 const navLinks = [
   { label: "About Us", href: "/about-us" },
-  { label: "Buy", href: "/search" },
-  { label: "Option 3", href: "/contact-us" },
+  { label: "Properties", href: "/search" },
+  // { label: "Option 3", href: "/contact-us" },
 ];
 
 export default function Navbar() {
@@ -41,17 +41,28 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed font-[Inter] w-full z-50 top-0 transition-all duration-300 glass-panel">
+    <nav className="fixed font-[Inter] w-full z-50 top-0 transition-all duration-300 backdrop-blur-xl ">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <div className="shrink-0 flex items-center  cursor-pointer">
-            <Link to={"/"}>
-              <span className="font-serif text-2xl font-bold tracking-tight text-boundry-primary">
-                Boundry
-              </span>
+          <div className="shrink-0 flex items-center cursor-pointer">
+            <Link to={"/"} className="flex items-center">
+              {/* Logo Image */}
+              <img
+                src="/favicon.svg"
+                className="w-15 object-contain"
+                alt="Boundry Logo"
+              />
+
+              {/* Text and Dot Wrapper */}
+              <div className="flex items-baseline">
+                <span className="font-serif text-2xl font-bold tracking-tight text-boundry-primary">
+                  Boundry
+                </span>
+                {/* The Dot as a full stop */}
+                <span className="h-1.5 w-1.5 rounded-full bg-gray-800 ml-0.5 mb-1.5" />
+              </div>
             </Link>
-            <span className="h-1 w-1 rounded-full bg-gray-800 mt-4" />
           </div>
 
           {/* Desktop Menu */}
@@ -60,7 +71,7 @@ export default function Navbar() {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-sm font-medium text-gray-900 hover:text-boundry-primary transition-colors"
+                className="text-md font-medium text-gray-900 hover:text-[#f38963] transition-colors"
               >
                 {link.label}
               </a>
@@ -79,31 +90,42 @@ export default function Navbar() {
                   >
                     <Avatar>
                       <AvatarImage src={user?.avatar?.url} alt="user" />
-                      {/* <AvatarFallback className="uppercase text-white bg-gray-800">
+                      <AvatarFallback className="uppercase text-white bg-gray-800">
                         {user ? user.username[0] : "U"}
-                      </AvatarFallback>*/}
+                      </AvatarFallback>
                     </Avatar>
                   </Button>
                 </DropdownMenuTrigger>
 
-                <DropdownMenuContent className="w-32 font-[Inter] bg-[#f9f8f3]">
+                <DropdownMenuContent className="border-0 w-32 font-[Inter] bg-[#f9f8f3]">
                   <DropdownMenuGroup>
                     <DropdownMenuItem>
-                      <User />
-                      <Link to={"/u/profile"}>My Profile</Link>
+                      <Link to={"/u/profile"} className="flex flex-row gap-2">
+                        {" "}
+                        <User />
+                        <span>My Profile</span>
+                      </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <Store />
-                      <Link to={"/u/listings"}>My Listings</Link>
+                      <Link to={"/u/listings"} className="flex flex-row gap-2">
+                        {" "}
+                        <Store />
+                        <span>My Listings</span>
+                      </Link>
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
 
                   <DropdownMenuGroup>
                     <DropdownMenuItem variant="destructive">
-                      <LogOut />
-                      <Link to={"/"} onClick={logoutHandler}>
-                        Log out
+                      <Link
+                        to={"/"}
+                        onClick={logoutHandler}
+                        className="flex flex-row gap-2"
+                      >
+                        {" "}
+                        <LogOut className="text-red-650" />
+                        <span>Log Out</span>
                       </Link>
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
@@ -119,13 +141,16 @@ export default function Navbar() {
               </Link>
             )}
             {isAuthenticated ? (
-              <Link className="bg-boundry-primary hover:bg-boundry-primary-dark text-white transition-all px-5 py-2.5 rounded-full text-sm font-medium shadow-lg shadow-boundry-primary/20 cursor-pointer">
+              <Link
+                to={"/u/listings/new"}
+                className="bg-boundry-primary hover:bg-boundry-primary-dark text-white transition-all px-5 py-2.5 rounded-full text-sm font-medium shadow-lg shadow-boundry-primary/20 cursor-pointer"
+              >
                 List Property
               </Link>
             ) : (
               <Link
                 to={"/auth"}
-                className="hidden md:block text-sm font-medium text-gray-900 hover:text-boundry-primary transition-colors"
+                className="hidden md:block text-sm font-medium text-gray-900 hover:text-[#f38963] transition-colors"
               >
                 Sign In
               </Link>
