@@ -13,6 +13,7 @@ import ProfileSettingsPage from "./pages/ProfileSettingsPage.jsx";
 import UserListingsPage from "./pages/UserListingsPage.jsx";
 import DashboardLayout from "./components/layout/DashboardLayout.jsx";
 import ListingFormPage from "./pages/ListingFormPage.jsx";
+import AboutPage from "./pages/AboutPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,11 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <LandingPage />,
+      },
+      // About Us
+      {
+        path: "/about-us",
+        element: <AboutPage />,
       },
       // Search / Results
       {
