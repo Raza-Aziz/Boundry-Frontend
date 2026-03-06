@@ -61,6 +61,14 @@ export const listingsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Listings"],
     }),
+
+    deleteListing: builder.mutation({
+      query: (id) => ({
+        url: `/listings/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Listings"],
+    }),
   }),
 });
 
@@ -72,4 +80,5 @@ export const {
   useUpdateAcquiredStatusMutation,
   useCreateListingMutation,
   useUpdateListingMutation,
+  useDeleteListingMutation,
 } = listingsApi;
