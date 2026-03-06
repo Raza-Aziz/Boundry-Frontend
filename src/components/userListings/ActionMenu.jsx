@@ -9,9 +9,19 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useDeleteListingMutation } from "../../store/api/listingsApi";
 
 function ActionMenu({ listingId }) {
   const [copied, setCopied] = useState(false);
+  const [deleteListing] = useDeleteListingMutation();
+
+  const handleDeleteListing = async () => {
+    try {
+      await deleteListing(listingId).unwrap();
+    } catch (err) {
+      console.error("Failed to delete", err);
+    }
+  };
 
   const handleCopy = async (e) => {
     // Prevent the dropdown from closing if you want them to see the "Copied" state
@@ -35,7 +45,7 @@ function ActionMenu({ listingId }) {
           <MoreHorizontal className="w-4 h-4" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="font-[Poppins]">
+      <DropdownMenuContent className="border-0 font-[Poppins]">
         <DropdownMenuGroup>
           <DropdownMenuItem className="cursor-pointer">
             <Link to={`/u/listings/${listingId}`}>
@@ -64,9 +74,13 @@ function ActionMenu({ listingId }) {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem variant="destructive" className="cursor-pointer">
-            <Trash />
-            Remove
+          <DropdownMenuItem
+            variant="destructive"
+            className="cursor-pointer flex items-center gap-2"
+            onSelect={handleDeleteListing}
+          >
+            <Trash className="w-4 h-4" />
+            <span>Remove</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
