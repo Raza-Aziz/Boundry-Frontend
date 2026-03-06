@@ -1,9 +1,9 @@
-import Navbar from "@/components/landing/Navbar";
-import HeroSection from "@/components/landing/HeroSection";
-import FeaturedListings from "@/components/landing/FeaturedListings";
-import WhyBoundry from "@/components/landing/WhyBoundry";
-import GlobalReach from "@/components/landing/GlobalReach";
-import Footer from "@/components/landing/Footer";
+import Navbar from "../components/landing/Navbar";
+import HeroSection from "../components/landing/HeroSection";
+import FeaturedListings from "../components/landing/FeaturedListings";
+import WhyBoundry from "../components/landing/WhyBoundry";
+import GlobalReach from "../components/landing/GlobalReach";
+import Footer from "../components/landing/Footer";
 
 export default function LandingPage() {
   return (
