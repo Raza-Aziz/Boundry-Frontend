@@ -13,24 +13,18 @@ import SearchPropertyCard from "../components/search/SearchPropertyCard";
 export default function PropertyDetail() {
   const { id } = useParams();
 
-  const {
-    data: listing,
-    isLoading,
-    isError,
-    error,
-  } = useGetListingQuery(id, {
+  const { data: listing, isLoading } = useGetListingQuery(id, {
     skip: !id,
   });
 
   // TODO : Add a spinner for loading while the data is fetched
-  const { data: similarListingsData, isLoading: isSimilarLoading } =
-    useGetSimilarListingsQuery(
-      {
-        city: listing?.location?.city,
-        status: listing?.status,
-      },
-      { skip: !listing },
-    );
+  const { data: similarListingsData } = useGetSimilarListingsQuery(
+    {
+      city: listing?.location?.city,
+      status: listing?.status,
+    },
+    { skip: !listing },
+  );
 
   // Map the data to a clean variable (adjust based on your API response structure)
   const similarListings =
@@ -173,11 +167,6 @@ export default function PropertyDetail() {
               <h2 className="font-serif text-2xl text-stone-900 dark:text-white mb-4">
                 Location
               </h2>
-              {/* <p className="text-stone-600 dark:text-stone-400 mb-6">
-                Located in The Flats, arguably the most desirable section of
-                Beverly Hills due to its wide, tree-lined streets and proximity
-                to world-class dining and shopping.
-              </p>*/}
               <div className="rounded-xl overflow-hidden h-64 w-full bg-stone-200 relative">
                 {/* Fallback/Static image map for design */}
                 <img
@@ -200,30 +189,55 @@ export default function PropertyDetail() {
 
         {/* Similar Homes Section */}
 
+        {/* Similar Homes Section */}
         <section className="mt-20 border-t border-stone-200 dark:border-stone-800 pt-12">
           <div className="flex items-center justify-between mb-8">
             <h2 className="font-serif text-2xl text-stone-900 dark:text-white capitalize">
               More{" "}
               {listing.status === "for-sale"
                 ? `${listing.propertyType}s for Sale`
-                : "Rent"}{" "}
+                : "Properties for Rent"}{" "}
               in {listing.location.city}
             </h2>
-            <Link
-              to={`/search?propertyType=${listing.propertyType}&city=${listing.location.city}&status=${listing.status}`}
-              className="text-sm font-medium text-boundry-primary hover:text-boundry-primary-dark"
-            >
-              View All
-            </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {similarListings.map((prop) => (
-              <Link to={`/listing/${prop._id}`}>
-                <SearchPropertyCard key={prop.id} property={prop} />
-              </Link>
-            ))}
-          </div>
+          {/* 1. Logic: Filter out the current listing and store results */}
+          {(() => {
+            const filteredListings = similarListings
+              .filter((prop) => prop._id !== id) // Use the 'id' from useParams
+              .slice(0, 3);
+
+            return filteredListings.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {filteredListings.map((prop) => (
+                  <Link key={prop._id} to={`/listing/${prop._id}`}>
+                    {/* Removed key from child to keep it only on the Link */}
+                    <SearchPropertyCard property={prop} />
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              /* 2. Logic: Empty State UI */
+              <div className="flex bg-transparent flex-col items-center justify-center py-16 px-4 border border-dashed border-stone-200 dark:border-stone-800 rounded-2xl bg-stone-50/50 dark:bg-stone-900/20">
+                <div className="bg-white dark:bg-stone-800 p-4 rounded-full shadow-sm mb-4">
+                  <Home className="w-8 h-8 text-stone-300" />
+                </div>
+                <h3 className="text-lg font-serif text-stone-900 dark:text-white">
+                  No other similar listings
+                </h3>
+                <p className="text-stone-500 text-sm text-center max-w-xs mt-2 font-light">
+                  It looks like this is the only listing of its kind in{" "}
+                  {listing.location.city} at the moment.
+                </p>
+                <Link
+                  to="/search"
+                  className="mt-6 text-sm font-medium text-boundry-primary hover:text-boundry-primary-dark transition-colors"
+                >
+                  Explore all properties →
+                </Link>
+              </div>
+            );
+          })()}
         </section>
       </main>
 
