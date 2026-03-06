@@ -1,8 +1,9 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { LogOut, Store, User } from "lucide-react";
+import { LogOut, Store, User, Menu, X } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,6 +22,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const [logout, { isLoading }] = useLogoutMutation();
   const navigate = useNavigate();
@@ -134,8 +136,7 @@ export default function Navbar() {
             ) : (
               <Link
                 to={"/auth"}
-                // className="hidden md:block text-sm font-medium text-gray-900 hover:text-boundry-primary"
-                className="bg-boundry-primary hover:bg-gray-800 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-lg shadow-boundry-primary/20 cursor-pointer"
+                className="hidden md:block bg-boundry-primary hover:bg-gray-800 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-lg shadow-boundry-primary/20 cursor-pointer"
               >
                 Get Started
               </Link>
@@ -143,7 +144,7 @@ export default function Navbar() {
             {isAuthenticated ? (
               <Link
                 to={"/u/listings/new"}
-                className="bg-boundry-primary hover:bg-boundry-primary-dark text-white transition-all px-5 py-2.5 rounded-full text-sm font-medium shadow-lg shadow-boundry-primary/20 cursor-pointer"
+                className="hidden md:flex bg-boundry-primary hover:bg-boundry-primary-dark text-white transition-all px-5 py-2.5 rounded-full text-sm font-medium shadow-lg shadow-boundry-primary/20 cursor-pointer"
               >
                 List Property
               </Link>
@@ -155,7 +156,63 @@ export default function Navbar() {
                 Sign In
               </Link>
             )}
+
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden flex items-center p-2 text-gray-900 hover:text-[#f38963] transition-colors focus:outline-none cursor-pointer"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
           </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu Dropdown */}
+      <div
+        className={`md:hidden absolute top-20 left-0 w-full bg-[#f9f8f3]/95 backdrop-blur-xl border-t border-gray-200 shadow-lg transition-all duration-300 ease-in-out origin-top ${
+          isOpen
+            ? "opacity-100 pointer-events-auto translate-y-0"
+            : "opacity-0 pointer-events-none -translate-y-4"
+        }`}
+      >
+        <div className="px-6 py-4 space-y-2">
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="block px-3 py-3 rounded-md text-base font-medium text-gray-900 hover:bg-gray-200/50 hover:text-[#f38963] transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
+          {isAuthenticated ? (
+            <Link
+              to={"/u/listings/new"}
+              className="block px-3 py-3 rounded-md text-base font-medium text-gray-900 hover:bg-gray-200/50 hover:text-[#f38963] transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              List Property
+            </Link>
+          ) : (
+            <div className="flex flex-col space-y-2 pt-2 border-t border-gray-200">
+              <Link
+                to={"/auth"}
+                className="block px-3 py-3 rounded-md text-base font-medium text-gray-900 hover:bg-gray-200/50 hover:text-[#f38963] transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Sign In
+              </Link>
+              <Link
+                to={"/auth"}
+                className="block px-3 py-3 rounded-md text-base font-medium bg-boundry-primary text-white text-center hover:bg-gray-800 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Get Started
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </nav>

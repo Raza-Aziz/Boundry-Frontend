@@ -27,7 +27,7 @@ function ActionMenu({ listingId }) {
     // Prevent the dropdown from closing if you want them to see the "Copied" state
     e.preventDefault();
 
-    const url = `http://localhost:5173/listing/${listingId}`;
+    const url = `${window.location.origin}/listing/${listingId}`;
 
     try {
       await navigator.clipboard.writeText(url);
