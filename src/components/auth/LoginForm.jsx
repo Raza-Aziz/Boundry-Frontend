@@ -15,6 +15,10 @@ function LoginForm() {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
   const [login, { isLoading }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
@@ -28,10 +32,14 @@ function LoginForm() {
       });
       navigate("/");
     } catch (error) {
-      toast.error(error.data?.message || "Authentication failed", {
-        position: "top-right",
-      });
-      console.log(error);
+      console.error("Login Error:", error);
+      const errorMessage =
+        error.data?.message || // Server JSON error
+        (error.status === "FETCH_ERROR"
+          ? "Server is waking up. Please try again in a moment."
+          : "Authentication failed");
+
+      toast.error(errorMessage, { position: "top-right" });
     }
   };
 
