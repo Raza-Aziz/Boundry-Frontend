@@ -3,13 +3,14 @@ import SearchPropertyCard from "../components/search/SearchPropertyCard";
 import Navbar from "../components/landing/Navbar";
 import Footer from "../components/landing/Footer";
 import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { PropertyCardSkeleton } from "../components/search/PropertySkeletonCard";
 import {
   Pagination,
   PaginationContent,
   PaginationItem,
   PaginationNext,
   PaginationPrevious,
+  PaginationLink,
 } from "@/components/ui/pagination";
 import {
   Select,
@@ -21,6 +22,7 @@ import {
   SelectLabel,
   SelectValue,
 } from "@/components/ui/select";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { Link, useSearchParams } from "react-router-dom";
 import { useGetListingsQuery } from "../store/api/listingsApi";
@@ -31,6 +33,7 @@ export default function SearchPage() {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
+
   const search = searchParams.get("search") || "";
   const currentFilters = {
     ...Object.fromEntries([...searchParams]),
@@ -40,10 +43,12 @@ export default function SearchPage() {
     search,
   };
 
-  const { data, isLoading, isError, error } =
+  const { data, isLoading, isFetching, isError, error } =
     useGetListingsQuery(currentFilters);
 
-  const totalPages = data?.totalPages || 1;
+  const showSkeletons = isLoading || isFetching;
+
+  const pages = data?.pages || 1;
   const handlePageChange = (newPage) => {
     const params = new URLSearchParams(searchParams);
 
@@ -70,16 +75,20 @@ export default function SearchPage() {
           <main className="col-span-12 lg:col-span-9 xl:col-span-9 space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center mt-8 justify-between gap-4 pb-4 border-b border-stone-200 dark:border-stone-800">
               <h1 className="text-xl md:text-2xl font-serif text-stone-900 dark:text-white">
-                <span className="font-normal">
-                  {data?.totalMatches || 0}{" "}
-                  {data?.totalMatches === 1 ? "Property" : "Properties"} Found
-                </span>
+                {showSkeletons ? (
+                  <Skeleton className="h-8 w-48" />
+                ) : (
+                  <span className="font-normal">
+                    {data?.totalMatches || 0}{" "}
+                    {data?.totalMatches === 1 ? "Property" : "Properties"} Found
+                  </span>
+                )}
               </h1>
               <div className="flex gap-3">
                 <div className="relative group">
                   <Select
                     onValueChange={(value) => {
-                      if (value === "newest" || value === "oldest") {
+                      if (value === "desc" || value === "asc") {
                         setSortBy("createdAt");
                         setSortOrder(value); // or map to "asc"/"desc" if backend expects that
                       } else if (value.startsWith("price-")) {
@@ -98,8 +107,8 @@ export default function SearchPage() {
                     <SelectContent position="popper">
                       <SelectGroup>
                         <SelectLabel>Sort by Date</SelectLabel>
-                        <SelectItem value="newest">Newest First</SelectItem>
-                        <SelectItem value="oldest">Oldest First</SelectItem>
+                        <SelectItem value="desc">Newest First</SelectItem>
+                        <SelectItem value="asc">Oldest First</SelectItem>
                       </SelectGroup>
 
                       <SelectSeparator />
@@ -131,38 +140,82 @@ export default function SearchPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-              {/* TODO : If isLoading is true, show your Skeleton loaders. */}
-              {data?.listings?.map((prop) => (
-                <Link to={`/listing/${prop._id}`}>
-                  <SearchPropertyCard key={prop.id} property={prop} />
-                </Link>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 transition-opacity duration-200">
+              {showSkeletons ? (
+                Array.from({ length: 6 }).map((_, i) => (
+                  <PropertyCardSkeleton key={i} />
+                ))
+              ) : data?.listings?.length > 0 ? (
+                data.listings.map((prop) => (
+                  <Link key={prop._id} to={`/listing/${prop._id}`}>
+                    <SearchPropertyCard property={prop} />
+                  </Link>
+                ))
+              ) : (
+                /* Empty State */
+                <div className="col-span-full py-20 text-center">
+                  <h3 className="text-lg font-medium text-stone-600">
+                    No properties found
+                  </h3>
+                  <p className="text-stone-400">
+                    Try adjusting your filters to find what you're looking for.
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Pagination Placeholder */}
             <div className="flex justify-center pt-12 pb-8">
               <Pagination>
-                <PaginationContent className="w-full justify-between">
+                <PaginationContent>
+                  {/* Previous Button */}
                   <PaginationItem>
                     <PaginationPrevious
+                      className={`cursor-pointer ${page <= 1 ? "pointer-events-none opacity-50" : ""}`}
                       onClick={() => handlePageChange(page - 1)}
-                      className={`border cursor-pointer ${page <= 1 ? "pointer-events-none opacity-50" : ""}`}
                     />
                   </PaginationItem>
-                  <PaginationItem>
-                    <p
-                      className="text-muted-foreground text-sm"
-                      aria-live="polite"
-                    >
-                      Page <span className="text-foreground">{page}</span> of{" "}
-                      <span className="text-foreground">{totalPages}</span>
-                    </p>
-                  </PaginationItem>
+
+                  {/* Logic to render page numbers */}
+                  {[...Array(pages)].map((_, index) => {
+                    const pageNum = index + 1;
+
+                    // Logic: Show first page, last page, and pages around the current page
+                    if (
+                      pageNum === 1 ||
+                      pageNum === pages ||
+                      (pageNum >= page - 1 && pageNum <= page + 1)
+                    ) {
+                      return (
+                        <PaginationItem key={pageNum}>
+                          <PaginationLink
+                            className="cursor-pointer"
+                            isActive={page === pageNum}
+                            onClick={() => handlePageChange(pageNum)}
+                          >
+                            {pageNum}
+                          </PaginationLink>
+                        </PaginationItem>
+                      );
+                    }
+
+                    // Show Ellipsis if there is a gap
+                    if (pageNum === page - 2 || pageNum === page + 2) {
+                      return (
+                        <PaginationItem key={pageNum}>
+                          <PaginationEllipsis />
+                        </PaginationItem>
+                      );
+                    }
+
+                    return null;
+                  })}
+
+                  {/* Next Button */}
                   <PaginationItem>
                     <PaginationNext
+                      className={`cursor-pointer ${page >= pages ? "pointer-events-none opacity-50" : ""}`}
                       onClick={() => handlePageChange(page + 1)}
-                      className={`border cursor-pointer ${page >= totalPages ? "pointer-events-none opacity-50" : ""}`}
                     />
                   </PaginationItem>
                 </PaginationContent>
