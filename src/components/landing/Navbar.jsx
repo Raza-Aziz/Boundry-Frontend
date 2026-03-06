@@ -70,13 +70,13 @@ export default function Navbar() {
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8 items-center">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
-                href={link.href}
+                to={link.href}
                 className="text-md font-medium text-gray-900 hover:text-[#f38963] transition-colors"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
