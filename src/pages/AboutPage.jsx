@@ -1,5 +1,5 @@
-import Navbar from "@/components/landing/Navbar";
-import Footer from "@/components/landing/Footer";
+import Navbar from "../components/landing/Navbar";
+import Footer from "../components/landing/Footer";
 import {
   Flag,
   ShieldCheck,
@@ -59,7 +59,13 @@ const slideFromRight = {
 };
 
 /* ──────────────────────────── Reusable InView Wrapper ─────────────────────── */
-function AnimatedSection({ children, className = "", variants = fadeUp, custom = 0, once = true }) {
+function AnimatedSection({
+  children,
+  className = "",
+  variants = fadeUp,
+  custom = 0,
+  once = true,
+}) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once, margin: "-80px" });
 
@@ -207,21 +213,33 @@ export default function AboutPage() {
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 0.7,
+                delay: 0.35,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="font-serif text-5xl md:text-6xl lg:text-7xl text-gray-900 mb-6 leading-tight"
             >
               Curating the world's <br />
-              <span className="italic text-gray-500">most exceptional</span> spaces.
+              <span className="italic text-gray-500">
+                most exceptional
+              </span>{" "}
+              spaces.
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 0.7,
+                delay: 0.5,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               className="text-xl text-gray-500 font-light leading-relaxed max-w-2xl font-body"
             >
-              Boundry isn't just a marketplace; it's a meticulously curated ecosystem
-              where architectural masterpieces meet their future custodians. We bridge
-              the gap between aspirational living and tangible reality.
+              Boundry isn't just a marketplace; it's a meticulously curated
+              ecosystem where architectural masterpieces meet their future
+              custodians. We bridge the gap between aspirational living and
+              tangible reality.
             </motion.p>
           </div>
         </div>
@@ -242,11 +260,14 @@ export default function AboutPage() {
                 <div className="w-12 h-12 bg-boundry-primary/10 rounded-full flex items-center justify-center mb-6 text-boundry-primary">
                   <Flag className="w-5 h-5" />
                 </div>
-                <h2 className="font-serif text-3xl text-gray-900 mb-4">Our Mission</h2>
+                <h2 className="font-serif text-3xl text-gray-900 mb-4">
+                  Our Mission
+                </h2>
                 <p className="text-gray-500 font-light leading-relaxed">
-                  To elevate the real estate experience by merging data-driven insights with
-                  white-glove concierge service. We aim to make the acquisition of luxury
-                  assets as seamless and inspiring as the properties themselves.
+                  To elevate the real estate experience by merging data-driven
+                  insights with white-glove concierge service. We aim to make
+                  the acquisition of luxury assets as seamless and inspiring as
+                  the properties themselves.
                 </p>
               </div>
               <div className="mt-8 flex items-center gap-2 text-boundry-primary font-medium cursor-pointer group-hover:translate-x-1 transition-transform">
@@ -269,9 +290,9 @@ export default function AboutPage() {
             <div className="relative z-10">
               <h3 className="font-serif text-2xl mb-3">The Vision</h3>
               <p className="text-gray-300 font-light text-sm">
-                A world where every transaction is transparent, every home tells a story, and
-                technology enhances—rather than replaces—the human connection in luxury real
-                estate.
+                A world where every transaction is transparent, every home tells
+                a story, and technology enhances—rather than replaces—the human
+                connection in luxury real estate.
               </p>
             </div>
           </AnimatedSection>
@@ -285,7 +306,9 @@ export default function AboutPage() {
               custom={i + 2}
             >
               <v.icon className="w-8 h-8 text-boundry-primary mb-3" />
-              <h4 className="font-serif text-lg font-bold text-gray-900">{v.title}</h4>
+              <h4 className="font-serif text-lg font-bold text-gray-900">
+                {v.title}
+              </h4>
               <p className="text-xs text-gray-500 mt-2">{v.description}</p>
             </AnimatedSection>
           ))}
@@ -296,8 +319,12 @@ export default function AboutPage() {
             variants={scaleIn}
             custom={5}
           >
-            <span className="text-4xl font-serif font-bold text-gray-900 mb-1">$4.2B+</span>
-            <span className="text-xs uppercase tracking-wider text-gray-600">in Total Sales</span>
+            <span className="text-4xl font-serif font-bold text-gray-900 mb-1">
+              $4.2B+
+            </span>
+            <span className="text-xs uppercase tracking-wider text-gray-600">
+              in Total Sales
+            </span>
           </AnimatedSection>
         </div>
       </section>
@@ -319,8 +346,8 @@ export default function AboutPage() {
               A Legacy of Firsts
             </h2>
             <p className="text-gray-500 max-w-2xl mx-auto font-light">
-              From a boutique agency in SoHo to a global powerhouse, our journey has been
-              defined by breaking boundaries.
+              From a boutique agency in SoHo to a global powerhouse, our journey
+              has been defined by breaking boundaries.
             </p>
           </AnimatedSection>
 
@@ -352,9 +379,10 @@ export default function AboutPage() {
                 Global Scale.
               </h2>
               <p className="text-gray-500 mb-8 font-light leading-relaxed">
-                Our network of elite agents spans 12 countries and 30 major metropolitan areas.
-                Whether you're looking for a penthouse in New York or a villa in Tuscany, Boundry
-                connects you to the world's finest properties.
+                Our network of elite agents spans 12 countries and 30 major
+                metropolitan areas. Whether you're looking for a penthouse in
+                New York or a villa in Tuscany, Boundry connects you to the
+                world's finest properties.
               </p>
 
               {/* Stats Grid */}
@@ -381,19 +409,52 @@ export default function AboutPage() {
               className="relative h-[500px] w-full bg-white rounded-2xl shadow-soft overflow-hidden border border-[#d0e1f0]/20"
             >
               <div className="absolute inset-0 bg-[#f8fafc]">
-                <svg className="w-full h-full text-[#d0e1f0]/30 fill-current" viewBox="0 0 800 500">
+                <svg
+                  className="w-full h-full text-[#d0e1f0]/30 fill-current"
+                  viewBox="0 0 800 500"
+                >
                   <path
                     d="M100,150 Q150,100 200,150 T300,150 T400,200 T500,150 T600,200 T700,150"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
                   />
-                  <circle className="fill-[#d0e1f0]/20" cx="180" cy="180" r="40" />
-                  <circle className="fill-[#d0e1f0]/20" cx="220" cy="300" r="30" />
-                  <circle className="fill-[#d0e1f0]/20" cx="400" cy="160" r="35" />
-                  <circle className="fill-[#d0e1f0]/20" cx="420" cy="240" r="35" />
-                  <circle className="fill-[#d0e1f0]/20" cx="580" cy="180" r="50" />
-                  <circle className="fill-[#d0e1f0]/20" cx="620" cy="320" r="25" />
+                  <circle
+                    className="fill-[#d0e1f0]/20"
+                    cx="180"
+                    cy="180"
+                    r="40"
+                  />
+                  <circle
+                    className="fill-[#d0e1f0]/20"
+                    cx="220"
+                    cy="300"
+                    r="30"
+                  />
+                  <circle
+                    className="fill-[#d0e1f0]/20"
+                    cx="400"
+                    cy="160"
+                    r="35"
+                  />
+                  <circle
+                    className="fill-[#d0e1f0]/20"
+                    cx="420"
+                    cy="240"
+                    r="35"
+                  />
+                  <circle
+                    className="fill-[#d0e1f0]/20"
+                    cx="580"
+                    cy="180"
+                    r="50"
+                  />
+                  <circle
+                    className="fill-[#d0e1f0]/20"
+                    cx="620"
+                    cy="320"
+                    r="25"
+                  />
                 </svg>
               </div>
 
@@ -418,7 +479,11 @@ export default function AboutPage() {
                     <motion.div
                       className="w-8 h-8 bg-boundry-primary/20 rounded-full absolute -top-2.5 -left-2.5"
                       animate={{ scale: [1, 2, 1], opacity: [0.6, 0, 0.6] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
                     />
                   )}
                   <div className="absolute top-6 left-1/2 -translate-x-1/2 bg-white px-3 py-1 rounded-md shadow-lg text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20">
@@ -436,7 +501,9 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <AnimatedSection className="flex justify-between items-end mb-12">
             <div>
-              <h2 className="font-serif text-4xl text-gray-900 mb-2">Leadership</h2>
+              <h2 className="font-serif text-4xl text-gray-900 mb-2">
+                Leadership
+              </h2>
               <p className="text-gray-500 font-light">
                 The visionaries shaping the future of Boundry.
               </p>
@@ -461,16 +528,24 @@ export default function AboutPage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
                       <div className="flex gap-4">
-                        <a href="#" className="text-white hover:text-boundry-primary transition-colors">
+                        <a
+                          href="#"
+                          className="text-white hover:text-boundry-primary transition-colors"
+                        >
                           <Mail className="w-5 h-5" />
                         </a>
-                        <a href="#" className="text-white hover:text-boundry-primary transition-colors">
+                        <a
+                          href="#"
+                          className="text-white hover:text-boundry-primary transition-colors"
+                        >
                           <Link2 className="w-5 h-5" />
                         </a>
                       </div>
                     </div>
                   </div>
-                  <h3 className="font-serif text-xl text-gray-900">{member.name}</h3>
+                  <h3 className="font-serif text-xl text-gray-900">
+                    {member.name}
+                  </h3>
                   <p className="text-sm text-boundry-primary uppercase tracking-wider font-medium">
                     {member.role}
                   </p>
@@ -501,7 +576,9 @@ function TimelineItem({ item, index }) {
       {/* Left content / spacer */}
       <div
         className={`w-full md:w-5/12 ${
-          isLeft ? "text-center md:text-right order-2 md:order-1" : "order-3 md:order-1"
+          isLeft
+            ? "text-center md:text-right order-2 md:order-1"
+            : "order-3 md:order-1"
         }`}
       >
         {isLeft && (
@@ -515,7 +592,9 @@ function TimelineItem({ item, index }) {
               <span className="text-boundry-primary font-bold text-lg mb-2 block">
                 {item.year}
               </span>
-              <h3 className="font-serif text-xl text-gray-900 mb-2">{item.title}</h3>
+              <h3 className="font-serif text-xl text-gray-900 mb-2">
+                {item.title}
+              </h3>
               <p className="text-gray-500 text-sm">{item.description}</p>
             </div>
           </motion.div>
@@ -535,7 +614,9 @@ function TimelineItem({ item, index }) {
       {/* Right content / spacer */}
       <div
         className={`w-full md:w-5/12 ${
-          !isLeft ? "text-center md:text-left order-2 md:order-3" : "order-3 md:order-3"
+          !isLeft
+            ? "text-center md:text-left order-2 md:order-3"
+            : "order-3 md:order-3"
         }`}
       >
         {!isLeft && (
@@ -549,7 +630,9 @@ function TimelineItem({ item, index }) {
               <span className="text-boundry-primary font-bold text-lg mb-2 block">
                 {item.year}
               </span>
-              <h3 className="font-serif text-xl text-gray-900 mb-2">{item.title}</h3>
+              <h3 className="font-serif text-xl text-gray-900 mb-2">
+                {item.title}
+              </h3>
               <p className="text-gray-500 text-sm">{item.description}</p>
             </div>
           </motion.div>
