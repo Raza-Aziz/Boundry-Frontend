@@ -2,7 +2,7 @@
 
 ## Description
 
-Boundry Frontend is the client-side application of the Boundry platform, a modern real estate listing website built with React. It provides an intuitive and responsive user interface for browsing property listings, user authentication, managing personal listings, and administrative functions. The frontend communicates with the Boundry Backend API to deliver a seamless user experience for property search, listing management, and user interactions.
+Boundry Frontend is the client-side application of the MERN stack Boundry platform, a modern real estate listing website built with React. It provides an intuitive and responsive user interface for browsing property listings, user authentication, managing personal listings, and administrative functions. The frontend communicates with the Boundry Backend API to deliver a seamless user experience for property search, listing management, and user interactions.
 
 ## Features
 
