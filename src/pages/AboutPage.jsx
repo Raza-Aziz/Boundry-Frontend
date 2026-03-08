@@ -139,7 +139,7 @@ const team = [
   {
     name: "Raza Aziz",
     role: "Founder & CEO",
-    image: "https://github.com/Raza-Aziz",
+    image: "https://github.com/Raza-Aziz.png",
   },
   {
     name: "James Sterling",
