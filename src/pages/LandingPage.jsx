@@ -7,7 +7,7 @@ import Footer from "../components/landing/Footer";
 
 export default function LandingPage() {
   return (
-    <div className="bg-boundry-bg-light text-boundry-text-dark font-display antialiased selection:bg-boundry-primary selection:text-white">
+    <div className="bg-boundry-bg-light dark:bg-boundry-bg-dark text-boundry-text-dark dark:text-stone-100 font-display antialiased selection:bg-boundry-primary selection:text-white transition-colors duration-300">
       <Navbar />
       <HeroSection />
       <FeaturedListings />

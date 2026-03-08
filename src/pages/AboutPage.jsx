@@ -137,10 +137,9 @@ const stats = [
 /* ──────────────────────────── Team Data ───────────────────────────────────── */
 const team = [
   {
-    name: "Elena Vance",
+    name: "Raza Aziz",
     role: "Founder & CEO",
-    image:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=688&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: "https://github.com/Raza-Aziz",
   },
   {
     name: "James Sterling",

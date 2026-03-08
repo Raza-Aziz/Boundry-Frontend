@@ -62,7 +62,7 @@ export default function SearchPage() {
   };
 
   return (
-    <div className="min-h-screen bg-boundry-bg-light dark:bg-background-dark text-stone-800 dark:text-stone-200 font-display antialiased selection:bg-primary/30 selection:text-primary-dark">
+    <div className="min-h-screen bg-boundry-bg-light dark:bg-boundry-bg-dark text-stone-800 dark:text-stone-200 font-display antialiased selection:bg-primary/30 selection:text-primary-dark transition-colors duration-300">
       <Navbar />
       {/* Main Content Area */}
       <div className="max-w-[1600px]  mt-12 mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -103,7 +103,7 @@ export default function SearchPage() {
                       <SelectValue placeholder="Sort by Price or Area" />
                     </SelectTrigger>
 
-                    <SelectContent position="popper">
+                    <SelectContent position="popper" className="border-0">
                       <SelectGroup>
                         <SelectLabel>Sort by Date</SelectLabel>
                         <SelectItem value="desc">Newest First</SelectItem>

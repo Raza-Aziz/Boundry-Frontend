@@ -99,7 +99,7 @@ export default function WhyBoundry() {
   const { ref: contentRef, isInView: contentInView } = useScrollReveal(0.2);
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-white dark:bg-boundry-bg-dark transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left — Image Column */}
@@ -130,7 +130,7 @@ export default function WhyBoundry() {
 
             {/* Decorative circle bottom-right */}
             <motion.div
-              className="absolute -bottom-6 -right-6 w-64 h-64 bg-boundry-bg-light rounded-full z-0"
+              className="absolute -bottom-6 -right-6 w-64 h-64 bg-boundry-bg-light dark:bg-stone-800/20 rounded-full z-0"
               initial={{ opacity: 0, scale: 0.6 }}
               animate={
                 imageInView
@@ -142,7 +142,7 @@ export default function WhyBoundry() {
 
             {/* Floating Stat Card */}
             <motion.div
-              className="absolute bottom-10 -left-6 z-20 bg-white p-6 rounded-xl shadow-glass border border-gray-100 max-w-xs"
+              className="absolute bottom-10 -left-6 z-20 bg-white dark:bg-stone-900 p-6 rounded-xl shadow-glass border border-gray-100 dark:border-stone-800 max-w-xs"
               variants={statCardVariants}
               initial="hidden"
               animate={imageInView ? "visible" : "hidden"}
@@ -152,10 +152,10 @@ export default function WhyBoundry() {
                   <Star className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-3xl font-serif font-bold text-gray-900">
+                  <p className="text-3xl font-serif font-bold text-gray-900 dark:text-white">
                     4.9
                   </p>
-                  <p className="text-xs text-gray-500 uppercase tracking-wide">
+                  <p className="text-xs text-gray-500 dark:text-stone-400 uppercase tracking-wide">
                     Customer Satisfaction
                   </p>
                 </div>
@@ -175,7 +175,7 @@ export default function WhyBoundry() {
             </motion.span>
 
             <motion.h2
-              className="font-serif text-4xl md:text-5xl text-gray-900 mb-6"
+              className="font-serif text-4xl md:text-5xl text-gray-900 dark:text-white mb-6"
               variants={headingVariants}
               initial="hidden"
               animate={contentInView ? "visible" : "hidden"}
@@ -184,7 +184,7 @@ export default function WhyBoundry() {
             </motion.h2>
 
             <motion.p
-              className="text-gray-500 mb-8 font-light leading-relaxed"
+              className="text-gray-500 dark:text-stone-400 mb-8 font-light leading-relaxed"
               variants={subtextVariants}
               initial="hidden"
               animate={contentInView ? "visible" : "hidden"}
@@ -211,10 +211,10 @@ export default function WhyBoundry() {
                     <f.icon className="w-6 h-6 text-boundry-primary" />
                   </div>
                   <div>
-                    <h4 className="font-serif text-xl text-gray-900 mb-2">
+                    <h4 className="font-serif text-xl text-gray-900 dark:text-white mb-2">
                       {f.title}
                     </h4>
-                    <p className="text-gray-500 text-sm font-light">
+                    <p className="text-gray-500 dark:text-stone-400 text-sm font-light">
                       {f.description}
                     </p>
                   </div>

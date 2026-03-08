@@ -1,4 +1,3 @@
-import Footer from "@/components/landing/Footer";
 import { Building2, Plus, Search, SlidersHorizontal, User } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import PropertyTable from "../components/userListings/PropertyTable";

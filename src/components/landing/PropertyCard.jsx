@@ -2,7 +2,7 @@ import { Heart, MapPin, Bed, Bath, Ruler, BadgeCheck } from "lucide-react";
 
 const PropertyCard = ({ property }) => {
   return (
-    <div className="group bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+    <div className="group bg-white dark:bg-stone-900/50 rounded-xl overflow-hidden shadow-soft hover:shadow-xl dark:hover:shadow-boundry-black transition-all duration-300 transform hover:-translate-y-1 border border-transparent dark:border-stone-800/50">
       {/* Image */}
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
@@ -25,7 +25,7 @@ const PropertyCard = ({ property }) => {
               ) : (
                 <span
                   key={badge}
-                  className="bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-semibold text-gray-900 rounded-md shadow-sm"
+                  className="bg-white/90 dark:bg-stone-900/90 backdrop-blur-sm px-3 py-1 text-xs font-semibold text-gray-900 dark:text-gray-100 rounded-md shadow-sm"
                 >
                   {badge}
                 </span>
@@ -43,14 +43,16 @@ const PropertyCard = ({ property }) => {
 
       {/* Info */}
       <div className="p-6">
-        <h3 className="font-serif text-2xl text-gray-900 group-hover:text-boundry-primary transition-colors mb-2">
+        <h3 className="font-serif text-2xl text-gray-900 dark:text-white group-hover:text-boundry-primary transition-colors mb-2">
           {property.price}
         </h3>
-        <p className="font-medium text-gray-900 mb-1">{property.name}</p>
-        <p className="text-gray-500 text-sm mb-4 flex items-center gap-1">
+        <p className="font-medium text-gray-900 dark:text-gray-100 mb-1">
+          {property.name}
+        </p>
+        <p className="text-gray-500 dark:text-stone-400 text-sm mb-4 flex items-center gap-1">
           <MapPin className="w-3.5 h-3.5" /> {property.location}
         </p>
-        <div className="flex items-center gap-6 border-t border-gray-100 pt-4 text-sm text-gray-600 font-body">
+        <div className="flex items-center gap-6 border-t border-gray-100 dark:border-stone-800 pt-4 text-sm text-gray-600 dark:text-stone-300 font-body">
           <div className="flex items-center gap-1">
             <Bed className="w-4 h-4 text-gray-400" /> {property.beds} Beds
           </div>

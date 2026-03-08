@@ -105,7 +105,7 @@ export default function HeroSection() {
           alt="Modern luxury villa with pool at dusk"
           className="w-full h-full object-cover brightness-[0.85]"
         />
-        <div className="absolute inset-0 bg-linear-to-b from-black/30 via-transparent to-boundry-bg-light" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/30 via-transparent to-boundry-bg-light dark:to-boundry-bg-dark" />
       </motion.div>
 
       {/* Content */}

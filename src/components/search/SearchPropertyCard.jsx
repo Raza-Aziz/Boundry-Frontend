@@ -94,7 +94,7 @@ export default function SearchPropertyCard({ property }) {
             <span className="text-stone-400 mt-1">Sqft</span>
           </div>
         </div>
-        <div className="mt-auto pt-4 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between">
+        <div className="mt-auto pt-4 border-t border-stone-100 dark:border-gray-700 flex items-center justify-between">
           <div className="flex items-center gap-2">
             {property?.createdBy?.avatar?.url ? (
               <img

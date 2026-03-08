@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 
 const properties = [
   {
@@ -117,7 +118,7 @@ export default function FeaturedListings() {
   const { ref: linkRef, isInView: linkInView } = useScrollReveal(0.5);
 
   return (
-    <section className="relative py-24 overflow-hidden bg-boundry-bg-light">
+    <section className="relative py-24 overflow-hidden bg-boundry-bg-light dark:bg-boundry-bg-dark transition-colors duration-300">
       {/* Beams */}
       <div className="beam beam-1" />
       <div className="beam beam-2" />
@@ -134,10 +135,10 @@ export default function FeaturedListings() {
           <span className="text-boundry-primary text-sm font-bold tracking-[0.2em] uppercase mb-3 block">
             Exclusive Listings
           </span>
-          <h2 className="font-serif text-4xl md:text-5xl text-gray-900 mb-4">
+          <h2 className="font-serif text-4xl md:text-5xl text-gray-900 dark:text-white mb-4">
             Curated Living
           </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto font-body font-light">
+          <p className="text-gray-500 dark:text-stone-400 max-w-2xl mx-auto font-body font-light">
             Hand-picked estates for the discerning buyer, vetted for quality,
             location, and architectural significance.
           </p>
@@ -166,12 +167,12 @@ export default function FeaturedListings() {
           initial="hidden"
           animate={linkInView ? "visible" : "hidden"}
         >
-          <a
-            href="#"
+          <Link
+            to={"/search"}
             className="inline-flex items-center gap-2 text-boundry-primary hover:text-boundry-primary-dark font-medium transition-colors border-b-2 border-boundry-primary/20 hover:border-boundry-primary pb-1"
           >
             View All Properties <ArrowRight className="w-4 h-4" />
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

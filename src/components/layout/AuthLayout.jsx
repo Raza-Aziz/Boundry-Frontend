@@ -7,7 +7,7 @@ const AuthLayout = ({ children }) => {
         <img
           src="https://images.unsplash.com/photo-1564078516393-cf04bd966897?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Image"
-          className="absolute inset-0 h-full w-full object-cover brightness-75 dark:brightness-[0.2] dark:grayscale"
+          className="absolute inset-0 h-full w-full object-cover brightness-75"
         />
 
         {/* Brand Logo - Top Left */}
@@ -40,12 +40,12 @@ const AuthLayout = ({ children }) => {
       </div>
 
       {/* RIGHT SIDE: The Form Column */}
-      <div className="flex flex-col items-center justify-center p-8 bg-[#F9F8F3]">
+      <div className="flex flex-col items-center justify-center p-8 bg-[#F9F8F3] dark:bg-boundry-bg-dark transition-colors duration-300">
         <div className="w-full max-w-110 flex flex-col items-center">
           {children}
 
           {/* Footer Copyright */}
-          <p className="mt-20 text-xs text-muted-foreground uppercase tracking-widest opacity-50">
+          <p className="mt-20 text-xs text-muted-foreground dark:text-stone-500 uppercase tracking-widest opacity-50">
             © 2023 Boundry Real Estate
           </p>
         </div>

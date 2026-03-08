@@ -48,19 +48,19 @@ function LoginForm() {
       <form onSubmit={handleSubmit(submitHandler)} className="w-full space-y-6">
         {/* EMAIL FIELD */}
         <div>
-          <label className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+          <label className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-stone-400">
             Email Address
           </label>
           <div className="relative">
             <MailIcon
               size={18}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-stone-500"
             />
             <input
               {...register("email")}
               type="email"
               placeholder="name@example.com"
-              className={`w-full pl-10 pr-4 py-3 rounded-lg text-sm font-[Poppins] bg-[#ffffff] border-2 border-black focus:ring-0 transition-colors ${errors.email ? "border-red-500" : "border-gray-300"}`}
+              className={`w-full pl-10 pr-4 py-3 rounded-lg text-sm font-[Poppins] bg-[#ffffff] dark:bg-stone-900/50 text-gray-900 dark:text-white border-2 focus:ring-0 transition-colors ${errors.email ? "border-red-500" : "border-black dark:border-stone-800"}`}
             />
           </div>
           {errors.email && (
@@ -73,7 +73,7 @@ function LoginForm() {
         {/* PASSWORD FIELD */}
         <div>
           <div className="flex justify-between">
-            <label className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+            <label className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-stone-400">
               Password
             </label>
             {/* TODO: Add functionality to FORGOT PASSWORD button */}
@@ -88,19 +88,19 @@ function LoginForm() {
           <div className="relative">
             <KeyRound
               size={18}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-stone-500"
             />
 
             <input
               {...register("password")}
               type={showPassword ? "text" : "password"}
               placeholder="Enter password"
-              className={`w-full pl-10 pr-4 py-3 rounded-lg text-sm font-[Poppins] bg-[#ffffff] border-2 border-black focus:ring-0 transition-colors ${errors.password ? "border-red-500" : "border-gray-300"}`}
+              className={`w-full pl-10 pr-4 py-3 rounded-lg text-sm font-[Poppins] bg-[#ffffff] dark:bg-stone-900/50 text-gray-900 dark:text-white border-2 focus:ring-0 transition-colors ${errors.password ? "border-red-500" : "border-black dark:border-stone-800"}`}
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-2 bottom-3.5 text-gray-400 hover:text-gray-600"
+              className="absolute right-2 bottom-3.5 text-gray-400 dark:text-stone-500 hover:text-gray-600 dark:hover:text-white transition-colors"
             >
               {showPassword ? <EyeOffIcon size={18} /> : <EyeIcon size={18} />}
             </button>

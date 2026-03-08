@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useLogoutMutation } from "../../store/api/authApi";
 import { toast } from "sonner";
+import { ThemeToggle } from "../ThemeToggle";
 
 const navLinks = [
   { label: "About Us", href: "/about-us" },
@@ -43,7 +44,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed font-[Inter] w-full z-50 top-0 transition-all duration-300 backdrop-blur-xl ">
+    <nav className="fixed font-[Inter] w-full z-50 top-0 transition-all duration-300 backdrop-blur-xl bg-white/70 dark:bg-stone-900/70 border-b border-gray-200/50 dark:border-stone-800/50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
@@ -62,7 +63,7 @@ export default function Navbar() {
                   Boundry
                 </span>
                 {/* The Dot as a full stop */}
-                <span className="h-1.5 w-1.5 rounded-full bg-gray-800 ml-0.5 mb-1.5" />
+                <span className="h-1.5 w-1.5 rounded-full bg-gray-800 dark:bg-gray-200 ml-0.5 mb-1.5" />
               </div>
             </Link>
           </div>
@@ -73,7 +74,7 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 to={link.href}
-                className="text-md font-medium text-gray-900 hover:text-[#f38963] transition-colors"
+                className="text-md font-medium text-gray-900 dark:text-gray-100 hover:text-[#f38963] transition-colors"
               >
                 {link.label}
               </Link>
@@ -82,6 +83,7 @@ export default function Navbar() {
 
           {/* Right Actions */}
           <div className="flex items-center space-x-6">
+            <ThemeToggle />
             {isAuthenticated ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -99,7 +101,7 @@ export default function Navbar() {
                   </Button>
                 </DropdownMenuTrigger>
 
-                <DropdownMenuContent className="border-0 w-32 font-[Inter] bg-[#f9f8f3]">
+                <DropdownMenuContent className="border-0 w-32 font-[Inter] bg-[#f9f8f3] dark:bg-stone-900 dark:text-white">
                   <DropdownMenuGroup>
                     <DropdownMenuItem>
                       <Link to={"/u/profile"} className="flex flex-row gap-2">
@@ -151,7 +153,7 @@ export default function Navbar() {
             ) : (
               <Link
                 to={"/auth"}
-                className="hidden md:block text-sm font-medium text-gray-900 hover:text-[#f38963] transition-colors"
+                className="hidden md:block text-sm font-medium text-gray-900 dark:text-gray-100 hover:text-[#f38963] transition-colors"
               >
                 Sign In
               </Link>
@@ -159,7 +161,7 @@ export default function Navbar() {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden flex items-center p-2 text-gray-900 hover:text-[#f38963] transition-colors focus:outline-none cursor-pointer"
+              className="md:hidden flex items-center p-2 text-gray-900 dark:text-white hover:text-[#f38963] transition-colors focus:outline-none cursor-pointer"
               onClick={() => setIsOpen(!isOpen)}
             >
               {isOpen ? (
@@ -174,7 +176,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       <div
-        className={`md:hidden absolute top-20 left-0 w-full bg-[#f9f8f3]/95 backdrop-blur-xl border-t border-gray-200 shadow-lg transition-all duration-300 ease-in-out origin-top ${
+        className={`md:hidden absolute top-20 left-0 w-full bg-[#f9f8f3]/95 dark:bg-stone-900/95 backdrop-blur-xl border-t border-gray-200 dark:border-stone-800 shadow-lg transition-all duration-300 ease-in-out origin-top ${
           isOpen
             ? "opacity-100 pointer-events-auto translate-y-0"
             : "opacity-0 pointer-events-none -translate-y-4"
@@ -185,7 +187,7 @@ export default function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              className="block px-3 py-3 rounded-md text-base font-medium text-gray-900 hover:bg-gray-200/50 hover:text-[#f38963] transition-colors"
+              className="block px-3 py-3 rounded-md text-base font-medium text-gray-900 dark:text-gray-100 hover:bg-gray-200/50 dark:hover:bg-stone-800/50 hover:text-[#f38963] transition-colors"
               onClick={() => setIsOpen(false)}
             >
               {link.label}

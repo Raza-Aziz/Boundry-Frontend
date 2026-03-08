@@ -47,19 +47,19 @@ function RegisterForm() {
       <form onSubmit={handleSubmit(submitHandler)} className="w-full space-y-5">
         {/* USERNAME FIELD */}
         <div>
-          <label className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+          <label className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-stone-400">
             Username
           </label>
           <div className="relative">
             <User2
               size={20}
-              className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400"
+              className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-stone-500"
             />
             <input
               {...register("username")}
               type="username"
               placeholder="John Doe"
-              className={`w-full pl-10 pr-4 py-3 rounded-lg text-sm font-[Poppins] bg-[#ffffff] border-2 border-black focus:ring-0 transition-colors ${errors.username ? "border-red-500" : "border-gray-300"}`}
+              className={`w-full pl-10 pr-4 py-3 rounded-lg text-sm font-[Poppins] bg-[#ffffff] dark:bg-stone-900/50 text-gray-900 dark:text-white border-2 focus:ring-0 transition-colors ${errors.username ? "border-red-500" : "border-black dark:border-stone-800"}`}
             />
           </div>
           {errors.username && (
@@ -71,19 +71,19 @@ function RegisterForm() {
 
         {/* EMAIL ADDRESS FIELD */}
         <div>
-          <label className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+          <label className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-stone-400">
             Email Address
           </label>
           <div className="relative">
             <MailIcon
               size={18}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-stone-500"
             />
             <input
               {...register("email")}
               type="email"
               placeholder="name@example.com"
-              className={`w-full pl-10 pr-4 py-3 rounded-lg text-sm font-[Poppins] bg-[#ffffff] border-2 border-black focus:ring-0 transition-colors ${errors.email ? "border-red-500" : "border-gray-300"}`}
+              className={`w-full pl-10 pr-4 py-3 rounded-lg text-sm font-[Poppins] bg-[#ffffff] dark:bg-stone-900/50 text-gray-900 dark:text-white border-2 focus:ring-0 transition-colors ${errors.email ? "border-red-500" : "border-black dark:border-stone-800"}`}
             />
           </div>
           {errors.email && (
@@ -101,7 +101,7 @@ function RegisterForm() {
           <div className="relative">
             <div className="flex">
               {/* STATIC PREFIX */}
-              <div className="flex items-center px-3 rounded-l-lg border-2 border-r-0 border-gray-300 bg-gray-100 text-sm font-[Poppins] text-gray-600">
+              <div className="flex items-center px-3 rounded-l-lg border-2 border-r-0 border-gray-300 dark:border-stone-800 bg-gray-100 dark:bg-stone-900 text-sm font-[Poppins] text-gray-600 dark:text-stone-400">
                 +92
               </div>
 
@@ -112,8 +112,8 @@ function RegisterForm() {
                 inputMode="numeric"
                 maxLength={10}
                 placeholder="3321234567"
-                className={`w-full pl-3 pr-4 py-3 rounded-r-lg text-sm font-[Poppins] bg-white border-2 focus:ring-0 transition-colors ${
-                  errors.phone ? "border-red-500" : "border-gray-300"
+                className={`w-full pl-3 pr-4 py-3 rounded-r-lg text-sm font-[Poppins] bg-white dark:bg-stone-900/50 text-gray-900 dark:text-white border-2 focus:ring-0 transition-colors ${
+                  errors.phone ? "border-red-500" : "border-gray-300 dark:border-stone-800"
                 }`}
               />
             </div>
@@ -128,7 +128,7 @@ function RegisterForm() {
         {/* PASSWORD FIELD */}
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+            <label className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-stone-400">
               Password
             </label>
 
@@ -142,12 +142,12 @@ function RegisterForm() {
                 {...register("password")}
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter password"
-                className={`w-full pl-10 pr-4 py-3 rounded-lg text-sm font-[Poppins] bg-[#ffffff] border-2 border-black focus:ring-0 transition-colors ${errors.password ? "border-red-500" : "border-gray-300"}`}
+                className={`w-full pl-10 pr-4 py-3 rounded-lg text-sm font-[Poppins] bg-[#ffffff] dark:bg-stone-900/50 text-gray-900 dark:text-white border-2 focus:ring-0 transition-colors ${errors.password ? "border-red-500" : "border-black dark:border-stone-800"}`}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-2 bottom-3.5 text-gray-400 hover:text-gray-600"
+                className="absolute right-2 bottom-3.5 text-gray-400 dark:text-stone-500 hover:text-gray-600 dark:hover:text-white transition-colors"
               >
                 {showPassword ? (
                   <EyeOffIcon size={18} />
@@ -164,7 +164,7 @@ function RegisterForm() {
           </div>
 
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+            <label className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-stone-400">
               Confirm Password
             </label>
 
@@ -178,12 +178,12 @@ function RegisterForm() {
                 {...register("confirmPassword")}
                 type={showConfirmPassword ? "text" : "password"}
                 placeholder="Confirm password"
-                className={`w-full pl-10 pr-4 py-3 rounded-lg text-sm font-[Poppins] bg-[#ffffff] border-2 border-black focus:ring-0 transition-colors ${errors.confirmPassword ? "border-red-500" : "border-gray-300"}`}
+                className={`w-full pl-10 pr-4 py-3 rounded-lg text-sm font-[Poppins] bg-[#ffffff] dark:bg-stone-900/50 text-gray-900 dark:text-white border-2 focus:ring-0 transition-colors ${errors.confirmPassword ? "border-red-500" : "border-black dark:border-stone-800"}`}
               />
               <button
                 type="button"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute right-2 bottom-3.5 text-gray-400 hover:text-gray-600"
+                className="absolute right-2 bottom-3.5 text-gray-400 dark:text-stone-500 hover:text-gray-600 dark:hover:text-white transition-colors"
               >
                 {showConfirmPassword ? (
                   <EyeOffIcon size={18} />

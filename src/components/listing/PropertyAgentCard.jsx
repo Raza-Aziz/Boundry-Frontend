@@ -94,7 +94,7 @@ function PropertyAgentCard({ listing }) {
             </button>
           </form>
           <div className="mt-6 text-center">
-            <p className="text-xs text-stone-400">
+            <p className="text-xs text-stone-400 dark:text-stone-500">
               By submitting this form you agree to our Terms of Use.
             </p>
           </div>
@@ -104,7 +104,7 @@ function PropertyAgentCard({ listing }) {
         <div className="mt-6 text-center">
           <Link
             to={`/search?city=${listing.location.city}`}
-            className="text-sm text-stone-500 hover:text-boundry-primary transition-colors capitalize inline-flex items-center gap-1 border-b border-transparent hover:border-boundry-primary pb-0.5"
+            className="text-sm text-stone-500 dark:text-stone-400 hover:text-boundry-primary dark:hover:text-boundry-primary transition-colors capitalize inline-flex items-center gap-1 border-b border-transparent hover:border-boundry-primary pb-0.5"
           >
             See similar properties in {listing.location.city}
             <ArrowRight className="w-4 h-4" />

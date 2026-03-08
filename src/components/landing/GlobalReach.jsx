@@ -16,7 +16,7 @@ export default function GlobalReach() {
           </h2>
           <Link
             to={"/search"}
-            className="bg-white text-gray-900 px-8 py-3 rounded-full font-medium hover:bg-gray-100 transition-colors shadow-lg cursor-pointer"
+            className="bg-white dark:bg-stone-900 text-gray-900 dark:text-white px-8 py-3 rounded-full font-medium hover:bg-gray-100 dark:hover:bg-stone-800 transition-colors shadow-lg cursor-pointer"
           >
             Explore Locations
           </Link>

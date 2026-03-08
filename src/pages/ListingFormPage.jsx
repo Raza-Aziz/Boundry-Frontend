@@ -237,14 +237,14 @@ const ListingFormPage = () => {
                   <SelectTrigger className="w-full  py-5.5 rounded-lg bg-[#fafaf9]">
                     <SelectValue placeholder="Select a type" />
                   </SelectTrigger>
-                  <SelectContent className="border-0 bg-[#fafaf9]">
+                  <SelectContent className="border-0 bg-[#fafaf9] dark:bg-stone-800">
                     <SelectGroup>
                       <SelectLabel>Property Types</SelectLabel>
-                      <SelectItem value="house">House</SelectItem>
-                      <SelectItem value="apartment">Apartment</SelectItem>
-                      <SelectItem value="villa">Villa</SelectItem>
-                      <SelectItem value="studio">Studio</SelectItem>
-                      <SelectItem value="office">Office</SelectItem>
+                      <SelectItem value="house" className="dark:hover:bg-stone-700">House</SelectItem>
+                      <SelectItem value="apartment" className="dark:hover:bg-stone-700">Apartment</SelectItem>
+                      <SelectItem value="villa" className="dark:hover:bg-stone-700">Villa</SelectItem>
+                      <SelectItem value="studio" className="dark:hover:bg-stone-700">Studio</SelectItem>
+                      <SelectItem value="office" className="dark:hover:bg-stone-700">Office</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
@@ -261,9 +261,9 @@ const ListingFormPage = () => {
                   <SelectTrigger className="w-full rounded-lg bg-[#fafaf9]">
                     <SelectValue placeholder="Sale or Rent" />
                   </SelectTrigger>
-                  <SelectContent className="border-0">
-                    <SelectItem value="for-sale">For Sale</SelectItem>
-                    <SelectItem value="for-rent">For Rent</SelectItem>
+                  <SelectContent className="border-0 dark:bg-stone-800">
+                    <SelectItem value="for-sale" className="dark:hover:bg-stone-700">For Sale</SelectItem>
+                    <SelectItem value="for-rent" className="dark:hover:bg-stone-700">For Rent</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -297,7 +297,7 @@ const ListingFormPage = () => {
                 <input
                   {...register("location.city", { required: true })}
                   placeholder="e.g. Karachi"
-                  className="w-full rounded-lg border border-stone-200 bg-stone-50 py-2.5 px-4"
+                  className="w-full rounded-lg border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 py-2.5 px-4"
                 />
               </div>
               <div>
@@ -307,7 +307,7 @@ const ListingFormPage = () => {
                 <input
                   {...register("location.area", { required: true })}
                   placeholder="e.g. DHA Phase 6"
-                  className="w-full rounded-lg border border-stone-200 bg-stone-50 py-2.5 px-4"
+                  className="w-full rounded-lg border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 py-2.5 px-4"
                 />
               </div>
             </div>
@@ -333,19 +333,19 @@ const ListingFormPage = () => {
                     onClick={() =>
                       setValue("bedrooms", Math.max(0, bedrooms - 1))
                     }
-                    className="w-10 h-10 cursor-pointer rounded-l-lg border border-stone-200"
+                    className="w-10 h-10 cursor-pointer rounded-l-lg border border-stone-200 dark:border-stone-700"
                   >
                     -
                   </button>
                   <input
                     {...register("bedrooms")}
-                    className="w-full text-center border-y border-stone-200 bg-[#fafaf9] py-1.75 pt-2 pb-1.5"
+                    className="w-full text-center border-y border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 py-1.75 pt-2 pb-1.5"
                     readOnly
                   />
                   <button
                     type="button"
                     onClick={() => setValue("bedrooms", bedrooms + 1)}
-                    className="w-10 h-10 cursor-pointer rounded-r-lg border border-stone-200"
+                    className="w-10 h-10 cursor-pointer rounded-r-lg border border-stone-200 dark:border-stone-700"
                   >
                     +
                   </button>
@@ -362,19 +362,19 @@ const ListingFormPage = () => {
                     onClick={() =>
                       setValue("bathrooms", Math.max(0, bathrooms - 1))
                     }
-                    className="w-10 h-10 cursor-pointer rounded-l-lg border border-stone-200"
+                    className="w-10 h-10 cursor-pointer rounded-l-lg border border-stone-200 dark:border-stone-700"
                   >
                     -
                   </button>
                   <input
                     {...register("bathrooms")}
-                    className="w-full text-center border-y border-stone-200 bg-[#fafaf9] py-1.75 pt-2 pb-1.5"
+                    className="w-full text-center border-y border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 py-1.75 pt-2 pb-1.5"
                     readOnly
                   />
                   <button
                     type="button"
                     onClick={() => setValue("bathrooms", bathrooms + 1)}
-                    className="w-10 h-10 cursor-pointer rounded-r-lg border border-stone-200"
+                    className="w-10 h-10 cursor-pointer rounded-r-lg border border-stone-200 dark:border-stone-700"
                   >
                     +
                   </button>
