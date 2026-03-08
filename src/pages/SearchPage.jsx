@@ -4,6 +4,7 @@ import Navbar from "../components/landing/Navbar";
 import Footer from "../components/landing/Footer";
 import { useState } from "react";
 import { PropertyCardSkeleton } from "../components/search/PropertySkeletonCard";
+import { Slider } from "@/components/ui/slider";
 import {
   Pagination,
   PaginationContent,
@@ -11,6 +12,7 @@ import {
   PaginationNext,
   PaginationPrevious,
   PaginationLink,
+  PaginationEllipsis,
 } from "@/components/ui/pagination";
 import {
   Select,
@@ -22,7 +24,17 @@ import {
   SelectLabel,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Filter } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 import { Link, useSearchParams } from "react-router-dom";
 import { useGetListingsQuery } from "../store/api/listingsApi";
@@ -65,31 +77,57 @@ export default function SearchPage() {
     <div className="min-h-screen bg-boundry-bg-light dark:bg-boundry-bg-dark text-stone-800 dark:text-stone-200 font-display antialiased selection:bg-primary/30 selection:text-primary-dark transition-colors duration-300">
       <Navbar />
       {/* Main Content Area */}
-      <div className="max-w-[1600px]  mt-12 mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Sidebar */}
-          <FiltersSidebar />
+      <div className="max-w-[1600px] pt-28 md:pt-32 mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div className="grid grid-cols-12 lg:gap-12">
+          {/* Desktop Sidebar */}
+          <aside className="hidden lg:block lg:col-span-3">
+            <FiltersSidebar />
+          </aside>
 
           {/* Listings */}
-          <main className="col-span-12 lg:col-span-9 xl:col-span-9 space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center mt-8 justify-between gap-4 pb-4 border-b border-stone-200 dark:border-stone-800">
-              <h1 className="text-xl md:text-2xl font-serif text-stone-900 dark:text-white">
-                {showSkeletons ? (
-                  <Skeleton className="h-8 w-48" />
-                ) : (
-                  <span className="font-normal">
-                    {data?.totalMatches || 0}{" "}
-                    {data?.totalMatches === 1 ? "Property" : "Properties"} Found
-                  </span>
-                )}
-              </h1>
+          <main className="col-span-12 lg:col-span-9 space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-6 border-b border-stone-200 dark:border-stone-800">
+              <div className="flex items-center justify-between w-full sm:w-auto gap-4">
+                <h1 className="text-xl md:text-2xl font-serif text-stone-900 dark:text-white">
+                  {showSkeletons ? (
+                    <Skeleton className="h-8 w-48" />
+                  ) : (
+                    <span className="font-normal">
+                      {data?.totalMatches || 0}{" "}
+                      {data?.totalMatches === 1 ? "Property" : "Properties"} Found
+                    </span>
+                  )}
+                </h1>
+
+                {/* Mobile Filter Trigger */}
+                <div className="lg:hidden">
+                  <Sheet>
+                    <SheetTrigger asChild>
+                      <Button variant="outline" size="sm" className="rounded-full flex items-center gap-2 border-stone-200 dark:border-stone-800">
+                        <Filter className="w-4 h-4" />
+                        <span>Filters</span>
+                      </Button>
+                    </SheetTrigger>
+                    <SheetContent side="left" className="w-[300px] sm:w-[400px] p-0 border-r border-stone-200 dark:border-stone-800">
+                       <SheetHeader className="px-6 py-4 border-b border-stone-100 dark:border-stone-800">
+                        <SheetTitle className="font-serif">Find Property</SheetTitle>
+                        <SheetDescription>Adjust your search criteria.</SheetDescription>
+                      </SheetHeader>
+                      <div className="px-6 py-6 h-[calc(100vh-80px)] overflow-y-auto custom-scrollbar">
+                        <FiltersSidebar isMobile={true} />
+                      </div>
+                    </SheetContent>
+                  </Sheet>
+                </div>
+              </div>
+
               <div className="flex gap-3">
-                <div className="relative group">
+                <div className="relative group w-full sm:w-auto">
                   <Select
                     onValueChange={(value) => {
                       if (value === "desc" || value === "asc") {
                         setSortBy("createdAt");
-                        setSortOrder(value); // or map to "asc"/"desc" if backend expects that
+                        setSortOrder(value); 
                       } else if (value.startsWith("price-")) {
                         setSortBy("price");
                         setSortOrder(value === "price-desc" ? "desc" : "asc");
@@ -99,39 +137,31 @@ export default function SearchPage() {
                       }
                     }}
                   >
-                    <SelectTrigger className="w-full max-w-80 text-stone-700 dark:text-stone-300 font-medium hover:text-primary cursor-pointer focus:outline-none font-body">
-                      <SelectValue placeholder="Sort by Price or Area" />
+                    <SelectTrigger className="w-full sm:w-60 text-stone-700 dark:text-stone-300 font-medium hover:text-primary cursor-pointer focus:outline-none font-body bg-white dark:bg-stone-900 border-stone-200 dark:border-stone-800 rounded-xl px-4 h-11">
+                      <SelectValue placeholder="Sort results" />
                     </SelectTrigger>
 
-                    <SelectContent position="popper" className="border-0">
+                    <SelectContent className="border-stone-200 dark:border-stone-800 rounded-xl">
                       <SelectGroup>
-                        <SelectLabel>Sort by Date</SelectLabel>
+                        <SelectLabel className="text-stone-400 text-[10px] uppercase tracking-widest font-bold px-3 py-2">Date</SelectLabel>
                         <SelectItem value="desc">Newest First</SelectItem>
                         <SelectItem value="asc">Oldest First</SelectItem>
                       </SelectGroup>
 
-                      <SelectSeparator />
+                      <SelectSeparator className="bg-stone-100 dark:bg-stone-800" />
 
                       <SelectGroup>
-                        <SelectLabel>Sort by Price</SelectLabel>
-                        <SelectItem value="price-desc">
-                          Price (High to Low)
-                        </SelectItem>
-                        <SelectItem value="price-asc">
-                          Price (Low to High)
-                        </SelectItem>
+                        <SelectLabel className="text-stone-400 text-[10px] uppercase tracking-widest font-bold px-3 py-2">Price</SelectLabel>
+                        <SelectItem value="price-desc text-xs">High to Low</SelectItem>
+                        <SelectItem value="price-asc text-xs">Low to High</SelectItem>
                       </SelectGroup>
 
-                      <SelectSeparator />
+                      <SelectSeparator className="bg-stone-100 dark:bg-stone-800" />
 
                       <SelectGroup>
-                        <SelectLabel>Sort by Area</SelectLabel>
-                        <SelectItem value="sqft-desc">
-                          Sqft (High to Low)
-                        </SelectItem>
-                        <SelectItem value="sqft-asc">
-                          Sqft (Low to High)
-                        </SelectItem>
+                        <SelectLabel className="text-stone-400 text-[10px] uppercase tracking-widest font-bold px-3 py-2">Area</SelectLabel>
+                        <SelectItem value="sqft-desc">High to Low</SelectItem>
+                        <SelectItem value="sqft-asc">Low to High</SelectItem>
                       </SelectGroup>
                     </SelectContent>
                   </Select>
@@ -146,31 +176,37 @@ export default function SearchPage() {
                 ))
               ) : data?.listings?.length > 0 ? (
                 data.listings.map((prop) => (
-                  <Link key={prop._id} to={`/listing/${prop._id}`}>
+                  <Link key={prop._id} to={`/listing/${prop._id}`} className="block transform transition-transform hover:-translate-y-1">
                     <SearchPropertyCard property={prop} />
                   </Link>
                 ))
               ) : (
                 /* Empty State */
-                <div className="col-span-full py-20 text-center">
-                  <h3 className="text-lg font-medium text-stone-600">
+                <div className="col-span-full py-32 text-center bg-white dark:bg-stone-900/50 rounded-2xl border border-dashed border-stone-200 dark:border-stone-800">
+                   <div className="mx-auto w-16 h-16 bg-stone-100 dark:bg-stone-800 rounded-full flex items-center justify-center mb-4">
+                    <Search className="w-8 h-8 text-stone-400" />
+                  </div>
+                  <h3 className="text-lg font-medium text-stone-600 dark:text-stone-300">
                     No properties found
                   </h3>
-                  <p className="text-stone-400">
-                    Try adjusting your filters to find what you're looking for.
+                  <p className="text-stone-400 text-sm mt-1">
+                    Try adjusting your filters or search terms.
                   </p>
+                  <Button variant="link" onClick={() => setSearchParams({})} className="mt-4 text-boundry-primary">
+                    Clear all filters
+                  </Button>
                 </div>
               )}
             </div>
 
             {/* Pagination Placeholder */}
-            <div className="flex justify-center pt-12 pb-8">
+            <div className="flex justify-center pt-16 pb-8">
               <Pagination>
-                <PaginationContent>
+                <PaginationContent className="flex-wrap justify-center gap-1">
                   {/* Previous Button */}
                   <PaginationItem>
                     <PaginationPrevious
-                      className={`cursor-pointer ${page <= 1 ? "pointer-events-none opacity-50" : ""}`}
+                      className={`cursor-pointer rounded-xl bg-white dark:bg-stone-900 border-stone-200 dark:border-stone-800 ${page <= 1 ? "pointer-events-none opacity-50" : ""}`}
                       onClick={() => handlePageChange(page - 1)}
                     />
                   </PaginationItem>
@@ -188,7 +224,7 @@ export default function SearchPage() {
                       return (
                         <PaginationItem key={pageNum}>
                           <PaginationLink
-                            className="cursor-pointer"
+                            className="cursor-pointer rounded-xl bg-white dark:bg-stone-900 border-stone-200 dark:border-stone-800"
                             isActive={page === pageNum}
                             onClick={() => handlePageChange(pageNum)}
                           >
@@ -202,7 +238,7 @@ export default function SearchPage() {
                     if (pageNum === page - 2 || pageNum === page + 2) {
                       return (
                         <PaginationItem key={pageNum}>
-                          <PaginationEllipsis />
+                          <PaginationEllipsis className="text-stone-400" />
                         </PaginationItem>
                       );
                     }
@@ -213,7 +249,7 @@ export default function SearchPage() {
                   {/* Next Button */}
                   <PaginationItem>
                     <PaginationNext
-                      className={`cursor-pointer ${page >= pages ? "pointer-events-none opacity-50" : ""}`}
+                      className={`cursor-pointer rounded-xl bg-white dark:bg-stone-900 border-stone-200 dark:border-stone-800 ${page >= pages ? "pointer-events-none opacity-50" : ""}`}
                       onClick={() => handlePageChange(page + 1)}
                     />
                   </PaginationItem>

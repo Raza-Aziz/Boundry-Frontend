@@ -5,7 +5,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-export default function FiltersSidebar() {
+export default function FiltersSidebar({ isMobile = false }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentFilters = Object.fromEntries([...searchParams]);
 
@@ -117,8 +117,7 @@ export default function FiltersSidebar() {
   };
 
   return (
-    <aside className="col-span-12 lg:col-span-3 xl:col-span-3 space-y-8 pr-4">
-      <div className="sticky top-28 space-y-8 max-h-[calc(100vh-8rem)] overflow-y-auto pb-8 pr-4 custom-scrollbar">
+    <div className={`space-y-8 ${isMobile ? "" : "sticky top-32 max-h-[calc(100vh-10rem)] overflow-y-auto pr-4 custom-scrollbar"}`}>
         {/* Header */}
         <div className="flex items-center justify-between">
           <h2 className="font-serif text-xl text-stone-900 dark:text-white font-medium">
@@ -324,6 +323,5 @@ export default function FiltersSidebar() {
           </div>
         </div> */}
       </div>
-    </aside>
-  );
+    );
 }

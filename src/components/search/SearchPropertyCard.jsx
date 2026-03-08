@@ -54,21 +54,17 @@ export default function SearchPropertyCard({ property }) {
       <div className="p-6 flex flex-col flex-grow">
         {/* TODO 1: MAKE THE CARD LENGTH CONSISTENT */}
         {/* TODO 2: Set the title and price properly */}
-        <div className="flex flex-row justify-between gap-1">
-          <div className="flex justify-between items-start mb-2">
-            <h3 className="font-serif text-lg text-stone-900 dark:text-white font-medium text-wrap text-ellipsis">
-              {property.title}
-            </h3>
-          </div>
-          <div className="flex justify-between items-start mb-2">
-            <h3 className="font-serif text-lg text-stone-900 dark:text-white font-medium">
-              {priceFormatter.format(property.price)}
-            </h3>
-          </div>
+        <div className="flex flex-col sm:flex-row justify-between items-start gap-2 mb-2">
+          <h3 className="font-serif text-lg text-stone-900 dark:text-white font-medium line-clamp-1 flex-1">
+            {property.title}
+          </h3>
+          <h3 className="font-serif text-lg text-stone-900 dark:text-white font-semibold whitespace-nowrap">
+            {priceFormatter.format(property.price)}
+          </h3>
         </div>
-        <p className="text-gray-500 text-sm mb-4 flex capitalize items-center gap-1">
-          <MapPin className="w-3.5 h-3.5" />{" "}
-          {property.location.area + ", " + property.location.city}
+        <p className="text-gray-500 text-sm mb-4 flex capitalize items-center gap-1.5">
+          <MapPin className="w-3.5 h-3.5 text-boundry-primary" />
+          <span className="truncate">{property.location.area + ", " + property.location.city}</span>
         </p>
         {/* <p className="font-body text-sm text-stone-500 dark:text-stone-400 line-clamp-1 mb-4">
           {property.address}
