@@ -108,7 +108,7 @@ export default function Navbar() {
                     size="icon"
                     className="rounded-full cursor-pointer h-9 w-9 md:h-10 md:w-10"
                   >
-                    <Avatar className="h-8 w-8 md:h-9 md:h-9">
+                    <Avatar className="h-8 w-8 md:h-8 md:h-8">
                       <AvatarImage src={user?.avatar?.url} alt="user" />
                       <AvatarFallback className="uppercase text-white bg-gray-800 text-xs">
                         {user ? user.username[0] : "U"}
@@ -120,13 +120,19 @@ export default function Navbar() {
                 <DropdownMenuContent className="border-0 w-44 mt-2 font-[Inter] bg-white/60 dark:bg-stone-900/60 backdrop-blur-2xl dark:text-white shadow-2xl rounded-2xl p-2">
                   <DropdownMenuGroup>
                     <DropdownMenuItem className="rounded-lg hover:bg-white/20">
-                      <Link to={"/u/profile"} className="flex flex-row items-center gap-3 w-full py-1">
+                      <Link
+                        to={"/u/profile"}
+                        className="flex flex-row items-center gap-3 w-full py-1"
+                      >
                         <User className="w-4 h-4" />
                         <span>My Profile</span>
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem className="rounded-lg hover:bg-white/20">
-                      <Link to={"/u/listings"} className="flex flex-row items-center gap-3 w-full py-1">
+                      <Link
+                        to={"/u/listings"}
+                        className="flex flex-row items-center gap-3 w-full py-1"
+                      >
                         <Store className="w-4 h-4" />
                         <span>My Listings</span>
                       </Link>
@@ -135,7 +141,10 @@ export default function Navbar() {
                   <DropdownMenuSeparator className="my-2 bg-white/10 dark:bg-stone-800/10" />
 
                   <DropdownMenuGroup>
-                    <DropdownMenuItem variant="destructive" className="rounded-lg hover:bg-red-500/10">
+                    <DropdownMenuItem
+                      variant="destructive"
+                      className="rounded-lg hover:bg-red-500/10"
+                    >
                       <Link
                         to={"/"}
                         onClick={logoutHandler}
