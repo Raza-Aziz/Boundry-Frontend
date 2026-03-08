@@ -14,11 +14,14 @@ import UserListingsPage from "./pages/UserListingsPage.jsx";
 import DashboardLayout from "./components/layout/DashboardLayout.jsx";
 import ListingFormPage from "./pages/ListingFormPage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
+import NotFound from "./pages/NotFound.jsx";
+import { ErrorFallback } from "./components/ErrorFallback";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorFallback />,
     children: [
       // test search page
       {
@@ -84,6 +87,10 @@ const router = createBrowserRouter([
           {
             path: "listings/:id",
             element: <ListingFormPage />,
+          },
+          {
+            path: "*",
+            element: <NotFound />,
           },
         ],
       },
