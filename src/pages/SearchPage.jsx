@@ -43,8 +43,7 @@ export default function SearchPage() {
     search,
   };
 
-  const { data, isLoading, isFetching, isError, error } =
-    useGetListingsQuery(currentFilters);
+  const { data, isLoading, isFetching } = useGetListingsQuery(currentFilters);
 
   const showSkeletons = isLoading || isFetching;
 
