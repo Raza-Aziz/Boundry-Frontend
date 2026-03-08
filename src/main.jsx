@@ -16,6 +16,7 @@ import ListingFormPage from "./pages/ListingFormPage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import { ErrorFallback } from "./components/ErrorFallback";
+import { ThemeProvider } from "next-themes";
 
 const router = createBrowserRouter([
   {
@@ -100,8 +101,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <RouterProvider router={router}>
-      <App />
-    </RouterProvider>
-  </Provider>,
+  <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <RouterProvider router={router}>
+        <App />
+      </RouterProvider>
+  </ThemeProvider>
+  </Provider>
 );
