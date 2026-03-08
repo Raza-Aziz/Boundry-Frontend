@@ -9,7 +9,7 @@ import {
   Mail,
   Link2,
 } from "lucide-react";
-import { motion, useInView } from "framer-motion";
+import { useInView } from "framer-motion";
 import { useRef } from "react";
 import aboutHeroBg from "../assets/about-hero-bg.png";
 
@@ -20,14 +20,6 @@ const fadeUp = {
     opacity: 1,
     y: 0,
     transition: { duration: 0.7, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] },
-  }),
-};
-
-const fadeIn = {
-  hidden: { opacity: 0 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    transition: { duration: 0.6, delay: i * 0.1 },
   }),
 };
 
@@ -196,8 +188,8 @@ export default function AboutPage() {
             alt="Modern luxury architecture at golden hour"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-boundry-bg-light via-boundry-bg-light/60 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-boundry-bg-light/80 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-boundry-bg-light via-boundry-bg-light/60 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-r from-boundry-bg-light/80 to-transparent" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pb-16 pt-32 w-full">
@@ -520,13 +512,13 @@ export default function AboutPage() {
             {team.map((member, i) => (
               <AnimatedSection key={member.name} variants={fadeUp} custom={i}>
                 <div className="group">
-                  <div className="relative overflow-hidden rounded-xl mb-4 aspect-[3/4]">
+                  <div className="relative overflow-hidden rounded-xl mb-4 aspect-3/4">
                     <img
                       src={member.image}
                       alt={member.name}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
+                    <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
                       <div className="flex gap-4">
                         <a
                           href="#"

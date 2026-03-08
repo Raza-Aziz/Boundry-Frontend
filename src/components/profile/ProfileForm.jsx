@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
-import { Camera, EyeIcon, EyeOffIcon } from "lucide-react";
-import { Spinner } from "@/components/ui/spinner";
+import { useState } from "react";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useUpdateProfileMutation } from "../../store/api/userApi";
 import { toast } from "sonner";
@@ -9,9 +8,9 @@ import { useGetCurrentUserQuery } from "../../store/api/authApi";
 
 function ProfileForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const { isAuthenticated, user } = useSelector((state) => state.auth);
-  const [updateProfile, isLoading] = useUpdateProfileMutation();
-  const { register, handleSubmit, setValue, reset } = useForm();
+  const { user } = useSelector((state) => state.auth);
+  const [updateProfile] = useUpdateProfileMutation();
+  const { register, handleSubmit } = useForm();
   const { data: currentUser } = useGetCurrentUserQuery();
 
   const submitHandler = async (values) => {
@@ -69,7 +68,7 @@ function ProfileForm() {
             type="text"
             defaultValue={user?.username}
             {...register("username")}
-            className="w-full bg-[#f7f7f6] dark:bg-stone-800 border border-stone-200 dark:border-stone-700 capitalize rounded-lg px-4 py-2.5 text-sm text-stone-900 dark:text-white focus:ring-1 focus:ring-boundry-primary focus:border-boundry-primary font-[Poppins] placeholder-stone-400 outline-none transition-colors"
+            className="w-full bg-boundry-bg-light dark:bg-stone-800 border border-stone-200 dark:border-stone-700 capitalize rounded-lg px-4 py-2.5 text-sm text-stone-900 dark:text-white focus:ring-1 focus:ring-boundry-primary focus:border-boundry-primary font-[Poppins] placeholder-stone-400 outline-none transition-colors"
           />
         </div>
 
@@ -85,7 +84,7 @@ function ProfileForm() {
             id="email"
             type="email"
             {...register("email")}
-            className="w-full bg-[#f7f7f6] dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-lg px-4 py-2.5 text-sm text-stone-900 dark:text-white focus:ring-1 focus:ring-boundry-primary focus:border-boundry-primary font-[Poppins] placeholder-stone-400 outline-none transition-colors"
+            className="w-full bg-boundry-bg-light dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-lg px-4 py-2.5 text-sm text-stone-900 dark:text-white focus:ring-1 focus:ring-boundry-primary focus:border-boundry-primary font-[Poppins] placeholder-stone-400 outline-none transition-colors"
           />
         </div>
 
@@ -101,7 +100,7 @@ function ProfileForm() {
             type="tel"
             defaultValue={user?.phone}
             {...register("phone")}
-            className="w-full bg-[#f7f7f6] dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-lg px-4 py-2.5 text-sm text-stone-900 dark:text-white focus:ring-1 focus:ring-boundry-primary focus:border-boundry-primary font-[Poppins] placeholder-stone-400 outline-none transition-colors"
+            className="w-full bg-boundry-bg-light dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-lg px-4 py-2.5 text-sm text-stone-900 dark:text-white focus:ring-1 focus:ring-boundry-primary focus:border-boundry-primary font-[Poppins] placeholder-stone-400 outline-none transition-colors"
           />
         </div>
 
@@ -116,7 +115,7 @@ function ProfileForm() {
             id="password"
             type={showPassword ? "text" : "password"}
             {...register("password")}
-            className="w-full bg-[#f7f7f6] dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-lg px-4 py-2.5 text-sm text-stone-900 dark:text-white focus:ring-1 focus:ring-boundry-primary focus:border-boundry-primary font-[Poppins] placeholder-stone-400 outline-none transition-colors"
+            className="w-full bg-boundry-bg-light dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-lg px-4 py-2.5 text-sm text-stone-900 dark:text-white focus:ring-1 focus:ring-boundry-primary focus:border-boundry-primary font-[Poppins] placeholder-stone-400 outline-none transition-colors"
           />
           <button
             type="button"

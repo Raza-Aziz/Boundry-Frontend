@@ -24,7 +24,7 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { isAuthenticated, user } = useSelector((state) => state.auth);
-  const [logout, { isLoading }] = useLogoutMutation();
+  const [logout] = useLogoutMutation();
   const navigate = useNavigate();
 
   const logoutHandler = async () => {
@@ -162,7 +162,11 @@ export default function Navbar() {
               className="md:hidden flex items-center p-2 text-gray-900 hover:text-[#f38963] transition-colors focus:outline-none cursor-pointer"
               onClick={() => setIsOpen(!isOpen)}
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </button>
           </div>
         </div>

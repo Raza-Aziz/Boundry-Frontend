@@ -33,7 +33,7 @@ export default function Footer() {
               </div>
             </Link>
 
-            <p className="text-gray-400 text-sm leading-relaxed mb-6 font-light max-w-[240px]">
+            <p className="text-gray-400 text-sm leading-relaxed mb-6 font-light max-w-60">
               Redefining luxury real estate with a focus on design, quality, and
               exceptional service. Find your place in the world.
             </p>
